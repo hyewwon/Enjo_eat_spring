@@ -29,7 +29,7 @@ public class EateryGroup extends Base{
     @Column(name = "group_location")
     private String groupLocation;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
