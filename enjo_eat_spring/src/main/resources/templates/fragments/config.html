@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<th:block th:fragment="configFragment">
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>WorkDay</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link th:href="@{bootstrap/img/favicon.png}" rel="icon">
+    <link th:href="@{bootstrap/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link th:href="@{https://fonts.gstatic.com}" rel="preconnect">
+    <link th:href="@{https://fonts.googleapis.com}" rel="preconnect">
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap}" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{bootstrap/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{bootstrap/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{bootstrap/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+    <link th:href="@{bootstrap/vendor/quill/quill.snow.css}" rel="stylesheet">
+    <link th:href="@{bootstrap/vendor/quill/quill.bubble.css}" rel="stylesheet">
+    <link th:href="@{bootstrap/vendor/remixicon/remixicon.css}" rel="stylesheet">
+    <link th:href="@{bootstrap/vendor/simple-datatables/style.css}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{bootstrap/css/style.css}" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: NiceAdmin
+    * Updated: Mar 09 2023 with Bootstrap v5.2.3
+    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+
+    <script th:src="@{https://code.jquery.com/jquery-3.5.1.min.js}" crossorigin="anonymous"></script>
+
+    <!-- Vendor JS Files -->
+    <script th:src="@{bootstrap/vendor/apexcharts/apexcharts.min.js}"></script>
+    <script th:src="@{bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{bootstrap/vendor/chart.js/chart.umd.js}"></script>
+    <script th:src="@{bootstrap/vendor/echarts/echarts.min.js}"></script>
+    <script th:src="@{bootstrap/vendor/quill/quill.min.js}"></script>
+    <script th:src="@{bootstrap/vendor/simple-datatables/simple-datatables.js}"></script>
+    <script th:src="@{bootstrap/vendor/tinymce/tinymce.min.js}"></script>
+    <script th:src="@{bootstrap/vendor/php-email-form/validate.js}"></script>
+
+
+    <!-- Template Main JS File -->
+    <script th:src="@{bootstrap/css/style.css}"></script>
+    <!--    <script src="{% static 'js/base.js' %}"></script>-->
+
+    <th:block layout:fragment="css"></th:block>
+    <th:block layout:fragment="script"></th:block>
+
+  </head>
+</th:block>
+</html>
