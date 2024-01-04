@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -25,5 +28,14 @@ public class User extends Base{
 
     @Column(name = "password", nullable = false )
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<EateryGroup> groups = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Eatery> eateries = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Reply> replies = new ArrayList<>();
 
 }
