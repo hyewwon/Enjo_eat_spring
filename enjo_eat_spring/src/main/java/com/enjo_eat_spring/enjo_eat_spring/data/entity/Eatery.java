@@ -45,6 +45,7 @@ public class Eatery extends Base{
     private EateryGroup group;
 
     @OneToMany(mappedBy = "eatery")
+    @Builder.Default
     private List<Reply> replies = new ArrayList<>();
 
 }

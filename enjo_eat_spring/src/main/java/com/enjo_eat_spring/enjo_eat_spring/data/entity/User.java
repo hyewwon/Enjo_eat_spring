@@ -30,12 +30,15 @@ public class User extends Base{
     private String password;
 
     @OneToMany(mappedBy = "user")
+    @Builder.Default
     private List<EateryGroup> groups = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
+    @Builder.Default
     private List<Eatery> eateries = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
+    @Builder.Default
     private List<Reply> replies = new ArrayList<>();
 
 }

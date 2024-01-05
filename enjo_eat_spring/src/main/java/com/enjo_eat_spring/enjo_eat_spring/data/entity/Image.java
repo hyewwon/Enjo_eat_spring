@@ -30,5 +30,6 @@ public class Image {
     private String imagePath;
 
     @OneToMany(mappedBy = "image")
+    @Builder.Default
     private List<Eatery> eateries = new ArrayList<>();
 }
