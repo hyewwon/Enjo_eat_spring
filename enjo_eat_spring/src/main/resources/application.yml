@@ -5,8 +5,6 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    #hikari:
-    #  jdbc-url: jdbc:h2:mem://localhost/~/enjo_eat_spring;MODE=MYSQL
     url: jdbc:mysql://localhost:3306/enjo_eat_spring?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
     password: 1234
