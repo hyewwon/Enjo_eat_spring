@@ -3,7 +3,7 @@
 <style>
     #group_box{
         width:300px;
-        height:150px;
+        height:175px;
         border:1px solid orange;
         box-shadow: 5px 5px 5px lightgray;
     }
@@ -32,15 +32,13 @@
                             <p>어느 테마로 가시겠어요?</p>
                         </div>
                         <div class="row">
-                            <div class="col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="200" id="group_box" style="margin:12px;">
-                                <a href="" type="button"
-                                   class="btn btn-outline-danger btn-sm mt-2" style="float: right;">수정</a>
+                            <div th:each="group : ${groups}" class="col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="200" id="group_box" style="margin:12px;">
+                                <a href="" type="button" class="btn btn-outline-danger btn-sm mt-2" style="float: right;">수정</a>
                                 <div class="post-box">
-                                    <h4 class="post-title">{{group.group_name}}</h4>
-                                    <p class="form-text">주요 지역 : {{group.group_location}}<br>{{group.group_comment}}</p>
-                                    <a href=""
-                                       class="readmore stretched-link"><span>등록된 메뉴 보러가기</span><i
-                                            class="bi bi-arrow-right"></i></a>
+                                    <h4 th:text="${group.getGroupName()}" class="post-title"></h4>
+                                    <p th:text="${group.getGroupLocation()}" class="form-text"></p>
+                                    <p th:text="${group.getGroupComment()}" class="form-text"></p>
+                                    <a href="" class="readmore stretched-link"><span>등록된 메뉴 보러가기</span><i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
