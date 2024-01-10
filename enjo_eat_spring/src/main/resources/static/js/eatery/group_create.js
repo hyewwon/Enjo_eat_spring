@@ -20,7 +20,21 @@ btn_submit.addEventListener("click",()=>{
         return false;
     }
 
-    document.getElementById("group_form").submit();
+    async function createGroup(){
+        const data =new FormData(document.getElementById("group_form"));
+        const response=await fetch('/eatery-api/group-creat',{
+            method:'POST',
+            headers: {'X-CSRFToken': csrftoken},
+            body: data,
+        })
+        const result =await response.json();
+
+        alert(result.message);
+
+        location.reload();
+
+    }
+
 
 })
 
