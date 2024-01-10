@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="ko">
 <th:block th:fragment="configFragment">
   <head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -43,7 +45,7 @@
 
     <!-- Template Main JS File -->
     <script th:src="@{/assets/js/main.js}"></script>
-    <!--    <script src="{% static 'js/base.js' %}"></script>-->
+    <script th:src="@{/js/base/base.js}"></script>
 
   </head>
 </th:block>
