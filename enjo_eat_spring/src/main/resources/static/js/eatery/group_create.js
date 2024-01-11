@@ -24,18 +24,17 @@ btn_submit.addEventListener("click",()=>{
         const data =new FormData(document.getElementById("group_form"));
         const response=await fetch('/eatery-api/group-creat',{
             method:'POST',
-            headers: {'X-CSRFToken': csrftoken},
+            headers: {
+                [csrf_header] : csrf
+            },
             body: data,
         })
         const result =await response.json();
-
-        alert(result.message);
-
-        location.reload();
-
+        if(result.success === true){
+            alert(result.message);
+            location.reload();
+        }
     }
-
-
 })
 
 
