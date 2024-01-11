@@ -15,8 +15,8 @@ public class BasicResponseDTO<T> {
         return new BasicResponseDTO<>(success, code.getCode(), code.getMessage(), null);
     }
 
-    public static <T> BasicResponseDTO<T> getFailMessage(Boolean success, ResponseEnum errorCode, Exception e){
-        return new BasicResponseDTO<>(success, errorCode.getCode(), errorCode.getMessage(e), null);
+    public static <T> BasicResponseDTO<T> getFailMessage(Boolean success, ResponseEnum errorCode){
+        return new BasicResponseDTO<>(success, errorCode.getCode(), errorCode.getMessage(), null);
     }
 
     public static <T> BasicResponseDTO<T> getErrorMessage(Boolean success, ResponseEnum errorCode, String message){
@@ -26,5 +26,6 @@ public class BasicResponseDTO<T> {
     public static <T> BasicResponseDTO<T> getSuccessData(Boolean success, ResponseEnum code, String message, T data){
         return new BasicResponseDTO<>(success, code.getCode(), code.getMessage(), data);
     }
+
 
 }

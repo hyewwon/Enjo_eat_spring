@@ -20,4 +20,10 @@ public class AuthDAOImpl implements AuthDAO{
     public void joinUser(User user) {
         userRepository.save(user);
     }
+
+    @Override
+    public boolean checkUserId(String userid) {
+        boolean result = userRepository.existsByUserid(userid);
+        return result;
+    }
 }

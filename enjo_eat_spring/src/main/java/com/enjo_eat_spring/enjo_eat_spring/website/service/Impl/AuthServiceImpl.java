@@ -27,4 +27,10 @@ public class AuthServiceImpl implements AuthService {
         authDAO.joinUser(user);
     }
 
+    @Override
+    public boolean checkUserId(String userid) {
+        boolean result = authDAO.checkUserId(userid);
+        return result;
+    }
+
 }
