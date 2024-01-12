@@ -29,6 +29,19 @@
                       class="php-email-form">
                     <div class="mb-5">
                         <div class="form-group mb-3">
+                            <div class="form-text">닉네임 : </div>
+                            <div class="mt-2 row">
+                                <div class="col-11">
+                                    <input type="text" class="form-control" name="username" id="username"
+                                           placeholder="닉네임 입력해주세요">
+                                </div>
+                                <div class="col-1">
+                                    <input type="button" id="btn_username" class="btn btn-outline-warning" value="중복검사" onclick="checkUserData('username');">
+                                </div>
+                            </div>
+                            <div class="mt-1" id="username_error"></div>
+                        </div>
+                        <div class="form-group mb-3">
                             <div class="form-text">아이디 : </div>
                             <div class="mt-2 row">
                                 <div class="col-11">
@@ -36,7 +49,7 @@
                                            placeholder="아이디를 입력해주세요">
                                 </div>
                                 <div class="col-1">
-                                    <input type="button" id="btn_userid" class="btn btn-outline-warning" value="중복검사" onclick="checkUserId()">
+                                    <input type="button" id="btn_userid" class="btn btn-outline-warning" value="중복검사" onclick="checkUserData('userid');">
                                 </div>
                             </div>
                             <div class="mt-1" id="userid_error"></div>

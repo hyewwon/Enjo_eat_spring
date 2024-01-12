@@ -4,5 +4,5 @@ import com.enjo_eat_spring.enjo_eat_spring.data.dto.UserDTO;
 
 public interface AuthService {
     void joinUser(UserDTO.CreateRequestDTO createRequestDTO);
-    boolean checkUserId(String userid);
+    boolean checkUserData(String userData, String type);
 }

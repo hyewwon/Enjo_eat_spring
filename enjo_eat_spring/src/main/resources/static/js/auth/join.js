@@ -1,9 +1,10 @@
 const joinform = document.getElementById("join_form");
 const userid = document.getElementById("userid");
+const username = document.getElementById("username");
 const password = document.getElementById("password");
 const re_password = document.getElementById("re_password");
-const btn_userid = document.getElementById("btn_userid");
 let chk_userid = false;
+let chk_username = false;
 
 // 회원가입
 async function join() {
@@ -31,44 +32,71 @@ async function join() {
 }
 
 // 아이디 중복 검사
-async function checkUserId() {
-    if (userid.value === "") {
-        userid.focus();
-        document.getElementById("userid_error").innerHTML = "<p style='color:red'>아이디를 입력해 주세요</p>";
-        return false;
+async function checkUserData(check_type) {
+    let data = "";
+    if(check_type === "username"){
+        if(username.value === ""){
+            username.focus();
+            document.getElementById("username_error").innerHTML = "<p style='color:red'>닉네임 입력해 주세요</p>";
+            return false;
+        }
+        data = username.value;
+    }else if(check_type === "userid"){
+        if (userid.value === "") {
+            userid.focus();
+            document.getElementById("userid_error").innerHTML = "<p style='color:red'>아이디를 입력해 주세요</p>";
+            return false;
+        }
+        data = userid.value;
     }
+    console.log(csrf_token, csrf_header)
     try {
-        btn_userid.disabled = true;
-        const response = await fetch("/auth-api/check-userid", {
+        const response = await fetch(window.location.origin + "/auth-api/check-userData", {
             method: "POST",
-            headers: {'X-CSRFToken': csrf_token},
-            body: JSON.stringify({userid: userid.value,})
+            headers: {csrf_header: csrf_token},
+            body: JSON.stringify({
+                "type" : check_type,
+                "data" : data
+            })
         });
         const result = await response.json();
         if (result.success === false) {
-            btn_userid.disabled = false;
             alert("중복검사 에러!! 다시 시도...")
         } else {
-            if (result.exist === true) {
-                document.getElementById("userid_error").innerHTML = "<p style='color:red'>중복된 아이디 입니다</p>";
-                btn_userid.disabled = false;
-
+            if (result.success === true) {
+                if(check_type === "userid"){
+                    document.getElementById("userid_error").innerHTML = "<p style='color:green'>사용 가능한 아이디 입니다</p>";
+                    chk_userid = true;
+                }else if(check_type === "username"){
+                    document.getElementById("userid_error").innerHTML = "<p style='color:green'>사용 가능한 닉네임 입니다</p>";
+                    chk_username = true;
+                }
             } else {
-                document.getElementById("userid_error").innerHTML = "<p style='color:green'>사용 가능한 아이디 입니다</p>";
-                btn_userid.disabled = false;
-                chk_userid = true;
+                if(check_type === "userid"){
+                    document.getElementById("username_error").innerHTML = "<p style='color:red'>중복된 아이디 입니다</p>"
+                }else if(check_type === "username"){}
+                    document.getElementById("username_error").innerHTML = "<p style='color:red'>중복된 닉네임 입니다</p>"
             }
         }
 
     } catch (error) {
         alert(error);
-        btn_userid.disabled = false;
     }
-
 }
+
 
 // 유효성 검사
 function validation() {
+    if(username.value === ""){
+        username.focus();
+        document.getElementById("username_error").innerHTML = "<p style='color:red'>닉네임 입력해 주세요</p>";
+        return false;
+    }
+    if(chk_username === false){
+        username.focus();
+        document.getElementById("username_error").innerHTML = "<p style='color:red'>닉네임 중복검사를 해주세요</p>";
+        return false;
+    }
     if (userid.value === "") {
         userid.focus();
         document.getElementById("userid_error").innerHTML = "<p style='color:red'>아이디를 입력해 주세요</p>";
@@ -106,6 +134,10 @@ function validation() {
     }
 }
 
+username.oninput = function (){
+    document.getElementById("username_error").innerHTML = "";
+    chk_username = false;
+}
 userid.oninput = function () {
     document.getElementById("userid_error").innerHTML = "";
     chk_userid = false;

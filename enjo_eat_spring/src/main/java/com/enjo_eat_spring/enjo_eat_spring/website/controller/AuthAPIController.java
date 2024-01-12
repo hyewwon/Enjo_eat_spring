@@ -26,13 +26,10 @@ public class AuthAPIController {
         return BasicResponseDTO.getSuccessMessage(true, ResponseEnum.OK);
     }
 
-    @PostMapping("/check-userid")
-    public BasicResponseDTO<Object> CheckUserId(@RequestParam("userid") String userId){
-        boolean result = authService.checkUserId(userId);
-        if(!result){
-            return BasicResponseDTO.getFailMessage(false, ResponseEnum.BAD_REQUEST);
-        }
-
-        return BasicResponseDTO.getSuccessMessage(true, ResponseEnum.OK);
+    @PostMapping("/check-userData")
+    public BasicResponseDTO<Object> CheckUserId(@RequestParam("type") String type, @RequestParam("data") String userData){
+        System.out.println("====================in=========================");
+        boolean result = authService.checkUserData(userData, type);
+        return BasicResponseDTO.getSuccessMessage(result, ResponseEnum.OK);
     }
 }
