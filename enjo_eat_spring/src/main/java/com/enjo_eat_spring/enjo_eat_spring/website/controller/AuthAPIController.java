@@ -5,8 +5,8 @@ import com.enjo_eat_spring.enjo_eat_spring.common.response.ResponseEnum;
 import com.enjo_eat_spring.enjo_eat_spring.data.dto.UserDTO;
 import com.enjo_eat_spring.enjo_eat_spring.website.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.antlr.v4.runtime.misc.ObjectEqualityComparator;
-import org.hibernate.type.descriptor.java.ObjectJavaType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth-api")
 public class AuthAPIController {
     AuthService authService;
-
+    private final Logger log = LoggerFactory.getLogger(getClass());
     @Autowired
     public AuthAPIController(AuthService authService){
         this.authService = authService;
@@ -28,7 +28,7 @@ public class AuthAPIController {
 
     @PostMapping("/check-userData")
     public BasicResponseDTO<Object> CheckUserId(@RequestParam("type") String type, @RequestParam("data") String userData){
-        System.out.println("====================in=========================");
+        log.info("====================in=========================");
         boolean result = authService.checkUserData(userData, type);
         return BasicResponseDTO.getSuccessMessage(result, ResponseEnum.OK);
     }

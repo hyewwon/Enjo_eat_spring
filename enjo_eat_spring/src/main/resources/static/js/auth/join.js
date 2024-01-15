@@ -17,7 +17,7 @@ async function join() {
     try {
         const response = await fetch("/auth-api/join", {
             method: "POST",
-            headers: {'X-CSRFToken': csrf_token},
+            headers: {csrf_header: csrf_token},
             body: joinform
         });
         const result = response.json();
@@ -49,7 +49,6 @@ async function checkUserData(check_type) {
         }
         data = userid.value;
     }
-    console.log(csrf_token, csrf_header)
     try {
         const response = await fetch(window.location.origin + "/auth-api/check-userData", {
             method: "POST",
