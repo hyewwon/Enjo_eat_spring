@@ -1,8 +1,10 @@
-package com.enjo_eat_spring.enjo_eat_spring.common.repsonse_new;
+package com.enjo_eat_spring.enjo_eat_spring.common.repsonse;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public enum SuccessCode {
     // 조회 성공 코드 (HTTP Response: 200 OK)
     SELECT_SUCCESS(200, "200", "SELECT SUCCESS"),
@@ -17,9 +19,4 @@ public enum SuccessCode {
     private final String code;
     private final String message;
 
-    SuccessCode(final int status, final String code, final String message){
-        this.status = status;
-        this.code = code;
-        this.message = message;
-    }
 }
