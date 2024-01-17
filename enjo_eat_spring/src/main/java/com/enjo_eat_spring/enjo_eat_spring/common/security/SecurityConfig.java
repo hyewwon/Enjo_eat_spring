@@ -10,21 +10,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.nio.file.Path;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-//                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable)
                 .headers((headerConfig) ->
                         headerConfig.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests
-                                .requestMatchers("/", "/login", "/join", "/auth-api/check-userData", "/auth-api/join", "/auth-api/loin", "/assets/**", "/js/**", "/css/**").permitAll()
-                                .anyRequest().authenticated())
+                                .requestMatchers("/", "/login", "/join", "/auth-api/check-userData", "/auth-api/join", "/auth-api/loin", "/assets/**", "/js/**", "/css/**").permitAll().anyRequest().authenticated())
                 .formLogin((formLoin) ->
                         formLoin
                                 .loginPage("/login")
