@@ -7,7 +7,7 @@ import java.util.Map;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SuccessResponse<T> {
-    private Map<String, T> result;
+    private T result;
     private int resultCode;
     private String resultMsg;
 
@@ -18,20 +18,20 @@ public class SuccessResponse<T> {
     }
 
     @Builder
-    protected SuccessResponse(final SuccessCode code, final Map<String, T> result){
+    protected SuccessResponse(final SuccessCode code, final T result){
         this.result = result;
         this.resultCode = code.getStatus();
         this.resultMsg = code.getMessage();
     }
 
     @Builder
-    public static SuccessResponse of(final SuccessCode code){
-        return new SuccessResponse(code);
+    public static <T> SuccessResponse<T> of(final SuccessCode code){
+        return new SuccessResponse<>(code);
     }
 
     @Builder
-    public static SuccessResponse of(final SuccessCode code, Map<String, T> result){
-        return new SuccessResponse(code, result);
+    public static <T> SuccessResponse<T> of(final SuccessCode code, final T result){
+        return new SuccessResponse<>(code, result);
     }
 
 }

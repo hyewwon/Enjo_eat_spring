@@ -1,7 +1,5 @@
 package com.enjo_eat_spring.enjo_eat_spring.website.controller;
 
-import com.enjo_eat_spring.enjo_eat_spring.common.response.BasicResponseDTO;
-import com.enjo_eat_spring.enjo_eat_spring.common.response.ResponseEnum;
 import com.enjo_eat_spring.enjo_eat_spring.data.dto.EateryGroupDTO;
 import com.enjo_eat_spring.enjo_eat_spring.website.service.EateryService;
 import lombok.RequiredArgsConstructor;
@@ -22,10 +20,10 @@ public class EateryAPIController {
         this.eateryGroupService = eateryGroupService;
     }
 
-    @PostMapping("/group-create")
-    public BasicResponseDTO<Object> postGroupCreate(@RequestBody EateryGroupDTO.CreateRequestDTO createRequestDTO){
-        Long eateryId = eateryGroupService.createGroup(createRequestDTO);
-        System.out.println(eateryId + "================================================");
-        return BasicResponseDTO.getSuccessData(true, ResponseEnum.OK, "저장되었습니다.", eateryId);
-    }
+//    @PostMapping("/group-create")
+//    public BasicResponseDTO<Object> postGroupCreate(@RequestBody EateryGroupDTO.CreateRequestDTO createRequestDTO){
+//        Long eateryId = eateryGroupService.createGroup(createRequestDTO);
+//        System.out.println(eateryId + "================================================");
+//        return BasicResponseDTO.getSuccessData(true, ResponseEnum.OK, "저장되었습니다.", eateryId);
+//    }
 }

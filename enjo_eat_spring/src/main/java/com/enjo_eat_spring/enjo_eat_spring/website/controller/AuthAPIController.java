@@ -1,5 +1,7 @@
 package com.enjo_eat_spring.enjo_eat_spring.website.controller;
 
+import com.enjo_eat_spring.enjo_eat_spring.common.repsonse.SuccessCode;
+import com.enjo_eat_spring.enjo_eat_spring.common.repsonse.SuccessResponse;
 import com.enjo_eat_spring.enjo_eat_spring.data.dto.UserDTO;
 import com.enjo_eat_spring.enjo_eat_spring.website.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -35,12 +37,9 @@ public class AuthAPIController {
 
     @ResponseBody
     @PostMapping("/check-userData")
-    public ResponseEntity<Map<String, String>> CheckUserId(@RequestBody Map<String, String> param){
-        log.info("====================in=========================");
-//        boolean result = authService.checkUserData(userData, type);
-        Map<String,Boolean> map = new HashMap<>();
-        map.put("success", true);
-
-        return ResponseEntity.ok(param);
+    public ResponseEntity<SuccessResponse<Boolean>> CheckUserId(@RequestBody Map<String, String> userData){
+        boolean dataExists = authService.checkUserData(userData.get("userData"), userData.get("type"));
+        SuccessResponse<Boolean> response = SuccessResponse.of(SuccessCode.SELECT_SUCCESS, dataExists);
+        return ResponseEntity.ok(response);
     }
 }
