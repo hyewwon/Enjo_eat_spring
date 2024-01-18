@@ -21,7 +21,7 @@ public class SecurityConfig {
                         headerConfig.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests
-                                .requestMatchers("/", "/login", "/join", "/auth-api/check-userData", "/auth-api/join", "/auth-api/loin", "/assets/**", "/js/**", "/css/**").permitAll().anyRequest().authenticated())
+                                .requestMatchers("/", "/login", "/join", "/auth-api/check-userData", "/auth-api/join", "/auth-api/login", "/assets/**", "/js/**", "/css/**").permitAll().anyRequest().authenticated())
                 .formLogin((formLoin) ->
                         formLoin
                                 .loginPage("/login")
