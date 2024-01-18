@@ -15,15 +15,20 @@ async function join() {
         return false;
     }
     try {
+        console.log(JSON.stringify(joinform))
         const response = await fetch("/auth-api/join", {
             method: "POST",
-            headers: {csrf_header: csrf_token},
-            body: joinform
+            headers: {csrf_header: csrf_token, 'Content-Type' : "application/json"},
+            body: JSON.stringify(joinform)
         });
         const result = response.json();
-        if (result === true) {
-            alert("가입 성공 !!");
-            location.href = "/";
+        if(response.status !== 200){
+            alert("가입 오류.. 관리자에게 문의해주세요.");
+        }else{
+            if (result === true) {
+                alert("가입이 완료되었습니다. 환영합니다 ^^");
+                location.href = "/";
+            }
         }
     }
     catch(error){
@@ -52,29 +57,30 @@ async function checkUserData(check_type) {
     try {
         const response = await fetch(window.location.origin + "/auth-api/check-userData", {
             method: "POST",
-            headers: {csrf_header: csrf_token},
+            headers: {csrf_header: csrf_token, "Content-Type" : "application/json"},
             body: JSON.stringify({
                 "type" : check_type,
                 "data" : data
             })
         });
-        const result = await response.json();
-        if (result.success === false) {
-            alert("중복검사 에러!! 다시 시도...")
+        const result_object = await response.json();
+        if (response.status !== 200) {
+            alert("중복검사 에러!! 다시 시도...");
         } else {
-            if (result.success === true) {
+            if (result_object.result === false) {
                 if(check_type === "userid"){
                     document.getElementById("userid_error").innerHTML = "<p style='color:green'>사용 가능한 아이디 입니다</p>";
                     chk_userid = true;
                 }else if(check_type === "username"){
-                    document.getElementById("userid_error").innerHTML = "<p style='color:green'>사용 가능한 닉네임 입니다</p>";
+                    document.getElementById("username_error").innerHTML = "<p style='color:green'>사용 가능한 닉네임 입니다</p>";
                     chk_username = true;
                 }
             } else {
                 if(check_type === "userid"){
-                    document.getElementById("username_error").innerHTML = "<p style='color:red'>중복된 아이디 입니다</p>"
-                }else if(check_type === "username"){}
+                    document.getElementById("userid_error").innerHTML = "<p style='color:red'>중복된 아이디 입니다</p>"
+                }else if(check_type === "username"){
                     document.getElementById("username_error").innerHTML = "<p style='color:red'>중복된 닉네임 입니다</p>"
+                }
             }
         }
 

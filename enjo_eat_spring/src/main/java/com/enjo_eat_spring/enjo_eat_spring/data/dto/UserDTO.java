@@ -1,6 +1,8 @@
 package com.enjo_eat_spring.enjo_eat_spring.data.dto;
 
 import com.enjo_eat_spring.enjo_eat_spring.data.entity.User;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,8 +15,16 @@ public class UserDTO {
     @Builder
     @Getter
     public static class CreateRequestDTO{
+        @NotBlank
+        @Size(min = 1)
         private String userid;
+
+        @NotBlank
+        @Size(min = 5, message = "5자리 이상 입력해주세요.")
         private String username;
+
+        @NotBlank
+        @Size(min = 5, message = "5자리 이상 입력해 주세요.")
         private String password;
 
         public void encodePassword(String encodedPassword){
