@@ -1,4 +1,4 @@
-const joinform = document.getElementById("join_form");
+const joinform = document.getElementById("joinForm");
 const userid = document.getElementById("userid");
 const username = document.getElementById("username");
 const password = document.getElementById("password");
@@ -15,13 +15,18 @@ async function join() {
         return false;
     }
     try {
-        console.log(JSON.stringify(joinform))
+        // const form = new FormData(document.getElementById("joinForm"));
         const response = await fetch("/auth-api/join", {
             method: "POST",
             headers: {csrf_header: csrf_token, 'Content-Type' : "application/json"},
-            body: JSON.stringify(joinform)
+            body: JSON.stringify({
+                "userid" : userid.value,
+                "username" : username.value,
+                "password" : password.value
+            })
         });
         const result = response.json();
+        console.log(response)
         if(response.status !== 200){
             alert("가입 오류.. 관리자에게 문의해주세요.");
         }else{
@@ -45,6 +50,11 @@ async function checkUserData(check_type) {
             document.getElementById("username_error").innerHTML = "<p style='color:red'>닉네임 입력해 주세요</p>";
             return false;
         }
+        // if(username.value.length < 2){
+        //     username.focus();
+        //     document.getElementById("username_error").innerHTML = "<p style='color:red'>2글자 이상 설정해 주세요.</p>";
+        //     return false;
+        // }
         data = username.value;
     }else if(check_type === "userid"){
         if (userid.value === "") {

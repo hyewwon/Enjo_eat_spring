@@ -29,7 +29,6 @@ public class AuthAPIController {
 
     @PostMapping("/join")
     public ResponseEntity<SuccessResponse<Boolean>> JoinUser(@RequestBody @Valid UserDTO.CreateRequestDTO createRequestDTO){
-        log.error(String.valueOf(createRequestDTO));
         authService.joinUser(createRequestDTO);
         SuccessResponse<Boolean> response = SuccessResponse.of(SuccessCode.INSERT_SUCCESS, true);
         return ResponseEntity.status(HttpStatus.OK).body(response);

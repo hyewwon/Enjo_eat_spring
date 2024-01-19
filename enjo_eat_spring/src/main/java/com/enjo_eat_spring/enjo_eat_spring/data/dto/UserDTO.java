@@ -15,13 +15,14 @@ public class UserDTO {
     @Builder
     @Getter
     public static class CreateRequestDTO{
+
         @NotBlank
-        @Size(min = 1)
-        private String userid;
+        @Size(min = 2, message = "2자리 이상 입력해주세요.")
+        private String username;
 
         @NotBlank
         @Size(min = 5, message = "5자리 이상 입력해주세요.")
-        private String username;
+        private String userid;
 
         @NotBlank
         @Size(min = 5, message = "5자리 이상 입력해 주세요.")
