@@ -34,11 +34,11 @@ public class AuthAPIController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @ResponseBody
     @PostMapping("/check-userData")
     public ResponseEntity<SuccessResponse<Boolean>> CheckUserId(@RequestBody Map<String, String> userData){
         boolean dataExists = authService.checkUserData(userData.get("data"), userData.get("type"));
         SuccessResponse<Boolean> response = SuccessResponse.of(SuccessCode.SELECT_SUCCESS, dataExists);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
 }

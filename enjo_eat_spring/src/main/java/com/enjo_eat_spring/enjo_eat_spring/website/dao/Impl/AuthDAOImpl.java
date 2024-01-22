@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class AuthDAOImpl implements AuthDAO{
@@ -24,12 +25,17 @@ public class AuthDAOImpl implements AuthDAO{
 
     @Override
     public boolean checkUserData(String userData, String type) {
-        boolean result = false;
         if(Objects.equals(type, "userid")){
-            result =  userRepository.existsByUserid(userData);
+            return userRepository.existsByUserid(userData);
         } else if (Objects.equals(type, "username")) {
-            result =  userRepository.existsByUsername(userData);
+            return userRepository.existsByUsername(userData);
         }
-        return result;
+        return false;
+    }
+
+    @Override
+    public User loginUser(String userid) {
+        Optional<User> result =  userRepository.findByUserid(userid);
+        return result.orElse(null);
     }
 }

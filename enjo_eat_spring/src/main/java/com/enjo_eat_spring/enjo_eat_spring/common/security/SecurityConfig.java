@@ -21,13 +21,13 @@ public class SecurityConfig {
                         headerConfig.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests
-                                .requestMatchers("/", "/login", "/join", "/auth-api/check-userData", "/auth-api/join", "/auth-api/login", "/assets/**", "/js/**", "/css/**").permitAll().anyRequest().authenticated())
+                                .requestMatchers("/", "/login", "/join", "/auth-api/check-userData", "/auth-api/join", "/security/login", "/assets/**", "/js/**", "/css/**").permitAll().anyRequest().authenticated())
                 .formLogin((formLoin) ->
                         formLoin
                                 .loginPage("/login")
-                                .usernameParameter("userId")
-                                .passwordParameter("password")
-                                .loginProcessingUrl("/auth-api/login")
+//                                .usernameParameter("userid")
+//                                .passwordParameter("password")
+                                .loginProcessingUrl("/security/login")
                                 .defaultSuccessUrl("/", true))
                 .logout((logoutConfig) ->
                         logoutConfig.logoutSuccessUrl("/"));
@@ -40,3 +40,4 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
+
