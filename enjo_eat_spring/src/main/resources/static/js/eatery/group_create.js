@@ -1,9 +1,8 @@
 const group_name = document.getElementById("name");
 const group_location = document.getElementById("location");
 const group_comment = document.getElementById("comment");
-const btn_submit = document.getElementById("btn_submit");
 
-btn_submit.addEventListener("click",()=>{
+function validation(){
     if(group_name.value === ""){
         group_name.focus();
         document.getElementById("name_error").innerHTML = "<p style='color:red;'>테마 이름을 작성해 주세요</p>";
@@ -19,23 +18,34 @@ btn_submit.addEventListener("click",()=>{
         document.getElementById("comment_error").innerHTML = "<p style='color:red;'>테마 소개를 작성해 주세요</p>";
         return false;
     }
+    return true;
+}
 
-    async function createGroup(){
-        const data =new FormData(document.getElementById("group_form"));
-        const response=await fetch('/eatery-api/group-creat',{
-            method:'POST',
-            headers: {
-                [csrf_header] : csrf
-            },
-            body: data,
-        })
-        const result =await response.json();
-        if(result.success === true){
-            alert(result.message);
-            location.reload();
-        }
+
+async function createGroup(){
+    if(!validation()){
+        return false;
     }
-})
+    if(!confirm("생성하시겠습니까?")){
+        return false;
+    }
+    const response=await fetch('/eatery-api/group-create',{
+        method:'POST',
+        headers: {csrf_header : csrf_token, "Content-Type" : "application/json"},
+        body: JSON.stringify({
+            "groupName" : group_name.value,
+            "groupLocation" : group_location.value,
+            "groupComment" : group_comment.value
+        }),
+    })
+    console.log(response);
+    const result = await response.json();
+    if(response.status !== 200){
+        alert(result.message);
+        location.reload();
+    }
+}
+
 
 
 group_name.oninput = function(){
