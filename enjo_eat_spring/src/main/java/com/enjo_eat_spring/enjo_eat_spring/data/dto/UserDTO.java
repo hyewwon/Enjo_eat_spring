@@ -15,7 +15,6 @@ public class UserDTO {
     @Builder
     @Getter
     public static class CreateRequestDTO{
-
         @NotBlank
         @Size(min = 2, message = "2자리 이상 입력해주세요.")
         private String username;

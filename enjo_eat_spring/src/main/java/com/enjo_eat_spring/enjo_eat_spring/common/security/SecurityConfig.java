@@ -2,6 +2,8 @@ package com.enjo_eat_spring.enjo_eat_spring.common.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -21,13 +23,10 @@ public class SecurityConfig {
                         headerConfig.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests
-                                .requestMatchers("/", "/login", "/join", "/auth-api/check-userData", "/auth-api/join", "/security/login", "/assets/**", "/js/**", "/css/**").permitAll().anyRequest().authenticated())
+                                .requestMatchers("/", "/login", "/join", "/auth-api/check-userData", "/auth-api/join", "/assets/**", "/js/**", "/css/**").permitAll().anyRequest().authenticated())
                 .formLogin((formLoin) ->
                         formLoin
                                 .loginPage("/login")
-//                                .usernameParameter("userid")
-//                                .passwordParameter("password")
-                                .loginProcessingUrl("/security/login")
                                 .defaultSuccessUrl("/", true))
                 .logout((logoutConfig) ->
                         logoutConfig.logoutSuccessUrl("/"));
@@ -38,6 +37,11 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 }
 
