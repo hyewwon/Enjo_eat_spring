@@ -29,20 +29,25 @@ async function createGroup(){
     if(!confirm("생성하시겠습니까?")){
         return false;
     }
-    const response=await fetch('/eatery-api/group-create',{
-        method:'POST',
-        headers: {csrf_header : csrf_token, "Content-Type" : "application/json"},
-        body: JSON.stringify({
-            "groupName" : group_name.value,
-            "groupLocation" : group_location.value,
-            "groupComment" : group_comment.value
-        }),
-    })
-    console.log(response);
-    const result = await response.json();
-    if(response.status !== 200){
-        alert(result.message);
-        location.reload();
+    try{
+        const response=await fetch('/eatery-api/group-create',{
+            method:'POST',
+            headers: {csrf_header : csrf_token, "Content-Type" : "application/json"},
+            body: JSON.stringify({
+                "groupName" : group_name.value,
+                "groupLocation" : group_location.value,
+                "groupComment" : group_comment.value
+            }),
+        })
+        const result = await response.json();
+        if(response.status !== 200){
+            alert("테마 생성 오류.. 관리자에게 문의해주세요.");
+        }else{
+
+        }
+
+    }catch(error){
+        alert(error);
     }
 }
 

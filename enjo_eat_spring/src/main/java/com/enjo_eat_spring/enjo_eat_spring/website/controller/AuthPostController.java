@@ -18,12 +18,12 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth-api")
-public class AuthAPIController {
+public class AuthPostController {
     AuthService authService;
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    public AuthAPIController(AuthService authService){
+    public AuthPostController(AuthService authService){
         this.authService = authService;
     }
 

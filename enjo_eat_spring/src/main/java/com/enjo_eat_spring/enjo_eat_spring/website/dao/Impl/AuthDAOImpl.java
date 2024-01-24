@@ -38,4 +38,10 @@ public class AuthDAOImpl implements AuthDAO{
         Optional<User> result =  userRepository.findByUserid(userid);
         return result.orElse(null);
     }
+
+    @Override
+    public User getUser(String username) {
+        Optional<User> result = userRepository.findByUsername(username);
+        return result.orElse(null);
+    }
 }

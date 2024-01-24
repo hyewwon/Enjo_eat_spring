@@ -6,4 +6,5 @@ public interface AuthDAO {
     void joinUser(User user);
     boolean checkUserData(String userData, String type);
     User loginUser(String username);
+    User getUser(String username);
 }

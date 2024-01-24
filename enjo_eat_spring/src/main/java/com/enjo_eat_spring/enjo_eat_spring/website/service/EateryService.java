@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface EateryService {
     List<EateryGroupDTO.ResponseDTO> getGroupList();
-    Long createGroup(EateryGroupDTO.CreateRequestDTO createRequestDTO);
+    Long createGroup(EateryGroupDTO.CreateRequestDTO createRequestDTO, String username);
 }
