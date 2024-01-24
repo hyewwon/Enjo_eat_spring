@@ -10,7 +10,7 @@ public class EateryGroupDTO {
     @AllArgsConstructor
     @Getter
     @Builder
-    public static class CreateRequestDTO{
+    public static class RequestDTO{
         private String groupName;
         private String groupComment;
         private String groupLocation;
@@ -35,15 +35,19 @@ public class EateryGroupDTO {
     @Builder
     @Getter
     public static class ResponseDTO{
+        private Long id;
         private String groupName;
         private String groupComment;
         private String groupLocation;
+        private User user;
 
         public ResponseDTO toDto(EateryGroup eateryGroup){
             return ResponseDTO.builder()
+                    .id(eateryGroup.getId())
                     .groupName(eateryGroup.getGroupName())
                     .groupComment(eateryGroup.getGroupComment())
                     .groupLocation(eateryGroup.getGroupComment())
+                    .user(eateryGroup.getUser())
                     .build();
         }
     }

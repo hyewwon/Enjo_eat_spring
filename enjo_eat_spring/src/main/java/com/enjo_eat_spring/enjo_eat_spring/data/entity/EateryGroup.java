@@ -37,4 +37,10 @@ public class EateryGroup extends Base{
     @Builder.Default
     private List<Eatery> eateries = new ArrayList<>();
 
+    public void update(String groupName, String groupComment, String groupLocation){
+        this.groupName = groupName;
+        this.groupComment = groupComment;
+        this.groupLocation = groupLocation;
+    }
+
 }

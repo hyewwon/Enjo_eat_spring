@@ -6,7 +6,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <h2>테마 추가</h2>
             <ol>
-                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/static}">Home</a></li>
                 <li>Add Group</li>
             </ol>
         </div>
@@ -19,7 +19,7 @@
             <div class="container">
                 <a href="" type="button" class="btn btn-outline-dark" style="">돌아가기</a>
                 <div class="section-header">
-                  <p>사용자들이 알기 쉽게 테마를 소개해주세요.</p>
+                  <p>사용자들이 알기 쉽게 테마를 간단히 소개해주세요.</p>
                 </div>
             </div>
         
@@ -49,6 +49,6 @@
 </section><!-- End Inner Page -->
 </th:block>
 <th:block layout:fragment="script">
-    <script type="text/javascript" th:src="@{/js/eatery/group_create.js}"></script>
+    <script type="text/javascript" th:src="@{/js/eatery_group/group_create.js}"></script>
 </th:block>
 </html>
