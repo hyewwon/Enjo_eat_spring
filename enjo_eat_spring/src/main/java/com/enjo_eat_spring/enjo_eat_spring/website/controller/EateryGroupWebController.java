@@ -14,7 +14,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/eatery")
+@RequestMapping("/eatery-group")
 public class EateryGroupWebController {
     EateryGroupService eateryGroupService;
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -39,7 +39,6 @@ public class EateryGroupWebController {
     @GetMapping("/group-edit/{groupId}")
     public String getGroupEdit(@PathVariable Long groupId, Model model){
         EateryGroupDTO.ResponseDTO responseDTO = eateryGroupService.getGroup(groupId);
-        log.error(responseDTO.getGroupComment());
         model.addAttribute("group", responseDTO);
         return "eatery_group/group_edit";
     }

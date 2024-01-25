@@ -34,11 +34,11 @@ async function updateGroup(){
             }),
         })
         const result = await response.json();
-        console.log(response)
         if(response.status !== 200){
             alert("테마 생성 오류.. 관리자에게 문의해주세요.");
         }else{
-
+            alert("수정되었습니다.");
+            location.reload();
         }
 
     }catch(error){
@@ -46,26 +46,26 @@ async function updateGroup(){
     }
 }
 
-// async function deleteGroup(pk){
-//     if(!confirm('테마를 삭제하면 등록된 모든 음식점들이 삭제됩니다.\n테마를 삭제할까요?')){
-//         return false;
-//     }
-//     try{
-//         const response = await fetch('',{
-//             method:"DELETE",
-//             headers:{'X-CSRFToken': csrftoken},
-//             body:JSON.stringify({group_pk:pk})
-//         })
-//         const result = await response.json();
-//         if(result.success == false){
-//             alert("삭제 에러");
-//         }else{
-//             location.href = "/eatery/group_manage/"
-//         }
-//     }catch(error){
-//         alert(error);
-//     }
-// }
+async function deleteGroup(){
+    if(!confirm('테마를 삭제하면 등록된 모든 음식점들이 삭제됩니다.\n테마를 삭제할까요?')){
+        return false;
+    }
+    try{
+        const response = await fetch(`/eateryGroup-api/group-delete/${group_id.value}`,{
+            method:"DELETE",
+            headers:{csrf_header : csrf_token, "Content-Type" : "application/json"}
+        })
+        const result = await response.json();
+        if(response.status !== 200){
+            alert("삭제 에러.. 관리자에게 문의해주세요.");
+        }else{
+            alert("삭제되었습니다.")
+            location.href = "/eatery-group/group-manage"
+        }
+    }catch(error){
+        alert(error);
+    }
+}
 
 
 group_name.oninput = function(){

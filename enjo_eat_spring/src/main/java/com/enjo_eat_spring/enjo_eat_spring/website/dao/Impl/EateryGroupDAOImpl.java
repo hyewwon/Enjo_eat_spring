@@ -1,6 +1,7 @@
 package com.enjo_eat_spring.enjo_eat_spring.website.dao.Impl;
 
 import com.enjo_eat_spring.enjo_eat_spring.data.entity.EateryGroup;
+import com.enjo_eat_spring.enjo_eat_spring.data.entity.User;
 import com.enjo_eat_spring.enjo_eat_spring.data.repository.EateryGroupRepository;
 import com.enjo_eat_spring.enjo_eat_spring.website.dao.EateryGroupDAO;
 import jakarta.transaction.Transactional;
@@ -27,7 +28,7 @@ public class EateryGroupDAOImpl implements EateryGroupDAO {
     @Override
     public EateryGroup getGroup(Long groupId) {
         EateryGroup eateryGroup = eateryGroupRepository.findById(groupId).orElseThrow(
-                () -> new IllegalArgumentException("아이디값이 없습니다")
+                () -> new IllegalArgumentException("존재하지 않는 그룹입니다.")
         );
         return eateryGroup;
     }
@@ -42,7 +43,7 @@ public class EateryGroupDAOImpl implements EateryGroupDAO {
     @Override
     public Long updateGroup(EateryGroup eateryGroup, Long groupId) {
         EateryGroup group = eateryGroupRepository.findById(groupId).orElseThrow(
-                () -> new IllegalArgumentException("아이디 값이 없습니다")
+                () -> new IllegalArgumentException("존재하지 않는 그룹입니다.")
         );
         if(group.getUser() != eateryGroup.getUser()){
             throw new UsernameNotFoundException("수정 권한이 없습니다.");
@@ -50,5 +51,17 @@ public class EateryGroupDAOImpl implements EateryGroupDAO {
         group.update(eateryGroup.getGroupName(), eateryGroup.getGroupComment(), eateryGroup.getGroupLocation());
         eateryGroupRepository.save(group);
         return group.getId();
+    }
+
+    @Override
+    public Boolean deleteGroup(Long groupId, User user) {
+        EateryGroup eateryGroup = eateryGroupRepository.findById(groupId).orElseThrow(
+                () -> new IllegalArgumentException("존재하지 않는 그룹입니다.")
+        );
+        if(eateryGroup.getUser() != user){
+            throw  new UsernameNotFoundException("수정 권한이 없습니다");
+        }
+        eateryGroupRepository.delete(eateryGroup);
+        return true;
     }
 }

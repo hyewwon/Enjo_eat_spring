@@ -6,7 +6,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <h2>테마 추가</h2>
             <ol>
-                <li><a th:href="@{/static}">Home</a></li>
+                <li><a th:href="@{/}">Home</a></li>
                 <li>Add Group</li>
             </ol>
         </div>
@@ -24,7 +24,7 @@
             </div>
         
             <div class="container">
-                <form action="/eatery/group-create" method="post" role="form" id="group_form" enctype="multipart/form-data" class="php-email-form">
+                <form action="/eatery-group/group-create" method="post" role="form" id="group_form" enctype="multipart/form-data" class="php-email-form">
                     <div class="row" id="input">
                         <div class="form-group mt-3">
                             <input type="text" class="form-control" name="name" id="name" data-rule="minlen:1" placeholder="이름을 작성해 주세요">

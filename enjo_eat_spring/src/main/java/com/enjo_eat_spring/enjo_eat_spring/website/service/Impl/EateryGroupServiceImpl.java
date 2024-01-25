@@ -44,9 +44,11 @@ public class EateryGroupServiceImpl implements EateryGroupService {
     public EateryGroupDTO.ResponseDTO getGroup(Long groupId) {
         EateryGroup group = eateryGroupDAO.getGroup(groupId);
         EateryGroupDTO.ResponseDTO groupDTO = EateryGroupDTO.ResponseDTO.builder()
+                .id(group.getId())
                 .groupName(group.getGroupName())
                 .groupComment(group.getGroupComment())
                 .groupLocation(group.getGroupLocation())
+                .user(group.getUser())
                 .build();
         return groupDTO;
     }
@@ -66,5 +68,11 @@ public class EateryGroupServiceImpl implements EateryGroupService {
         requestDTO.setUser(user);
         EateryGroup eateryGroup = requestDTO.toEntity();
         return eateryGroupDAO.updateGroup(eateryGroup, groupId);
+    }
+
+    @Override
+    public Boolean deleteGroup(Long groupId, String username) {
+        User user = authDAO.getUser(username);
+        return eateryGroupDAO.deleteGroup(groupId, user);
     }
 }

@@ -49,4 +49,15 @@ public class EateryGroupAPIController {
         SuccessResponse<Long> response = SuccessResponse.of(SuccessCode.UPDATE_SUCCESS, id);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @DeleteMapping("/group-delete/{groupId}")
+    public ResponseEntity<SuccessResponse<Boolean>> deleteGroup(@PathVariable Long groupId){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null){
+            throw new UsernameNotFoundException("권한이 없습니다.");
+        }
+        Boolean result  = eateryGroupService.deleteGroup(groupId, authentication.getName());
+        SuccessResponse<Boolean> response = SuccessResponse.of(SuccessCode.DELETE_SUCCESS, result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }
