@@ -27,7 +27,7 @@ password.oninput = function(){
 }
 
 function enterkey() {
-    if (window.event.keyCode == 13) {
+    if (window.keyCode === 13) {
         btn_login.click()
     }
 }
