@@ -29,7 +29,7 @@ public class Image {
     @Column(name = "image_path")
     private String imagePath;
 
-    @OneToMany(mappedBy = "image")
+    @OneToMany(mappedBy = "image", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @Builder.Default
     private List<Eatery> eateries = new ArrayList<>();
 }

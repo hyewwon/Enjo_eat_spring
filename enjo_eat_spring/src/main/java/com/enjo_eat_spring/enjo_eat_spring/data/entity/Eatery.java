@@ -21,7 +21,7 @@ public class Eatery extends Base{
     private String eateryName;
 
     @Column(name = "eatery_type")
-    private String eatery_type;
+    private String eateryType;
 
     @Column(name = "eatery_real_location")
     private String eateryRealLocation;
@@ -32,19 +32,19 @@ public class Eatery extends Base{
     @Column(name = "comment")
     private String comment;
 
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "image_id")
     private Image image;
 
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
     private EateryGroup group;
 
-    @OneToMany(mappedBy = "eatery")
+    @OneToMany(mappedBy = "eatery", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @Builder.Default
     private List<Reply> replies = new ArrayList<>();
 
