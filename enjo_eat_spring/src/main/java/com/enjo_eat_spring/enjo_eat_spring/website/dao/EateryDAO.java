@@ -1,6 +1,10 @@
 package com.enjo_eat_spring.enjo_eat_spring.website.dao;
 
 
-public interface EateryDAO {
+import com.enjo_eat_spring.enjo_eat_spring.data.entity.Eatery;
 
+import java.util.List;
+
+public interface EateryDAO {
+    List<Eatery> getEateryList(Long groupId);
 }
