@@ -2,7 +2,6 @@ package com.enjo_eat_spring.enjo_eat_spring.website.controller;
 
 import com.enjo_eat_spring.enjo_eat_spring.data.dto.EateryDTO;
 import com.enjo_eat_spring.enjo_eat_spring.data.dto.EateryGroupDTO;
-import com.enjo_eat_spring.enjo_eat_spring.data.entity.EateryGroup;
 import com.enjo_eat_spring.enjo_eat_spring.website.service.EateryGroupService;
 import com.enjo_eat_spring.enjo_eat_spring.website.service.EateryService;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +25,9 @@ public class EateryWebController {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    public EateryWebController(EateryService eateryService){
+    public EateryWebController(EateryService eateryService, EateryGroupService eateryGroupService){
         this.eateryService = eateryService;
+        this.eateryGroupService = eateryGroupService;
     }
 
     @GetMapping("/eatery-manage/{groupId}")

@@ -37,7 +37,7 @@
                                 <div class="info-item d-flex">
                                     <div>
                                         <h4>등록자 : </h4>
-                                        <p></p>
+                                        <p th:text="${session}"></p>
                                     </div>
                                 </div><!-- End Info Item -->
 
@@ -62,12 +62,13 @@
                                 </div><!-- End Info Item -->
                             </div>
                             <div class="text-center mt-5">
-                                <button type="button" id="btn_submit" class="btn btn-warning btn-lg">등록하기</button>
+                                <button type="button" id="btn_submit" class="btn btn-warning btn-lg" onclick="createEatery();">등록하기</button>
                             </div>
                         </div>
-                        <input type="hidden" value="{{group_location}}" id="group_location" name="group_location">
+                        <input type="hidden" th:value="${eateryGroup.getGroupLocation()}" id="group_location" name="group_location">
                         <div class="col-lg-8">
                             <form action="" method="post" role="form" id="regist_form" enctype="multipart/form-data" class="php-email-form">
+                                <input type="hidden" id="group-id" th:value="${eateryGroup.getId()}">
                                 <div class="row" id="input">
                                     <div class="col-md-6 form-group">
                                         <input type="text" name="eatery_name" class="form-control" id="eatery_name"
@@ -84,7 +85,7 @@
                                             <option class="form-text" value="기타">기타</option>
                                         </select>
                                     </div>
-                                    <div class="form-group mt-3">
+                                    <div class="form-group mt-2">
                                         <input type="file" class="form-control" name="user_image" id="user_image"
                                                data-rule="minlen:1" required>
                                     </div>
@@ -101,7 +102,7 @@
                                         <input type="hidden" id="eatery_real_location" name="eatery_real_location"
                                                value="">
                                     </div>
-                                    <p style="font-size:small;">* 테마 설정 지역: {{group_location}}</p>
+                                    <p style="font-size:small;">* 테마 설정 지역: <span th:text="${eateryGroup.getGroupLocation()}"></span></p>
                                 </div>
                             </form>
                             <div class="map_wrap">
@@ -109,7 +110,7 @@
                                 <div id="menu_wrap" class="bg_white">
                                     <div class="option">
                                         <div>
-                                            키워드 : <input type="text" th:value="${eateryGroup.groupLocation}" id="keyword" size="15">
+                                            키워드 : <input type="text" th:value="${eateryGroup.getGroupLocation()}" id="keyword" size="15">
                                             <button type="button" class="btn btn-warning" onclick="searchPlaces();" id="btn_map">검색하기</button>
                                         </div>
                                     </div>

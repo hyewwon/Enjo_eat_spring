@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface EateryService {
     List<EateryDTO.ListResponseDTO> getEateryList(Long groupId);
+    Boolean createEatery(EateryDTO.RequestDTO requestDTO, Long groupId, String username);
 }

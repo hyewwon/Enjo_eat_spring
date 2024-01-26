@@ -5,6 +5,7 @@ import com.enjo_eat_spring.enjo_eat_spring.data.entity.EateryGroup;
 import com.enjo_eat_spring.enjo_eat_spring.data.repository.EateryGroupRepository;
 import com.enjo_eat_spring.enjo_eat_spring.data.repository.EateryRepository;
 import com.enjo_eat_spring.enjo_eat_spring.website.dao.EateryDAO;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,12 @@ public class EateryDAOImpl implements EateryDAO {
                 () -> new IllegalArgumentException("존재하지 않는 그룹입니다.")
         );
         return eateryRepository.findAllByGroup(eateryGroup);
+    }
+
+    @Override
+    @Transactional
+    public Boolean createEatery(Eatery eatery) {
+        eateryRepository.save(eatery);
+        return true;
     }
 }

@@ -41,6 +41,7 @@ public class EateryGroupDAOImpl implements EateryGroupDAO {
     }
 
     @Override
+    @Transactional
     public Long updateGroup(EateryGroup eateryGroup, Long groupId) {
         EateryGroup group = eateryGroupRepository.findById(groupId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 그룹입니다.")
@@ -54,6 +55,7 @@ public class EateryGroupDAOImpl implements EateryGroupDAO {
     }
 
     @Override
+    @Transactional
     public Boolean deleteGroup(Long groupId, User user) {
         EateryGroup eateryGroup = eateryGroupRepository.findById(groupId).orElseThrow(
                 () -> new IllegalArgumentException("존재하지 않는 그룹입니다.")

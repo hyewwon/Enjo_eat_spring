@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface EateryDAO {
     List<Eatery> getEateryList(Long groupId);
+    Boolean createEatery(Eatery eatery);
 }
