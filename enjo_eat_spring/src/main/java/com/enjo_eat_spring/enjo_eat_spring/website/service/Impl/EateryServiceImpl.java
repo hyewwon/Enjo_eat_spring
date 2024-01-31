@@ -1,8 +1,10 @@
 package com.enjo_eat_spring.enjo_eat_spring.website.service.Impl;
 
 import com.enjo_eat_spring.enjo_eat_spring.data.dto.EateryDTO;
+import com.enjo_eat_spring.enjo_eat_spring.data.dto.ImageDTO;
 import com.enjo_eat_spring.enjo_eat_spring.data.entity.Eatery;
 import com.enjo_eat_spring.enjo_eat_spring.data.entity.EateryGroup;
+import com.enjo_eat_spring.enjo_eat_spring.data.entity.Image;
 import com.enjo_eat_spring.enjo_eat_spring.data.entity.User;
 import com.enjo_eat_spring.enjo_eat_spring.website.dao.AuthDAO;
 import com.enjo_eat_spring.enjo_eat_spring.website.dao.EateryDAO;
@@ -45,11 +47,13 @@ public class EateryServiceImpl implements EateryService {
     }
 
     @Override
-    public Boolean createEatery(EateryDTO.RequestDTO requestDTO, Long groupId, String username) {
+    public Boolean createEatery(EateryDTO.RequestDTO requestDTO, ImageDTO.RequestDTO imageDTO, Long groupId, String username) {
         User user = authDAO.getUser(username);
         EateryGroup eateryGroup = eateryGroupDAO.getGroup(groupId);
+        Image image = imageDTO.toEntity();
         requestDTO.setUser(user);
         requestDTO.setGroup(eateryGroup);
+        requestDTO.setImage(image);
         Eatery eatery = requestDTO.toEntity();
         return eateryDAO.createEatery(eatery);
     }
