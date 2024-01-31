@@ -2,6 +2,7 @@ package com.enjo_eat_spring.enjo_eat_spring.website.dao.Impl;
 
 import com.enjo_eat_spring.enjo_eat_spring.data.entity.Eatery;
 import com.enjo_eat_spring.enjo_eat_spring.data.entity.EateryGroup;
+import com.enjo_eat_spring.enjo_eat_spring.data.entity.Image;
 import com.enjo_eat_spring.enjo_eat_spring.data.repository.EateryGroupRepository;
 import com.enjo_eat_spring.enjo_eat_spring.data.repository.EateryRepository;
 import com.enjo_eat_spring.enjo_eat_spring.data.repository.ImageRepository;
@@ -35,8 +36,15 @@ public class EateryDAOImpl implements EateryDAO {
     @Override
     @Transactional
     public Boolean createEatery(Eatery eatery) {
+        Image image = imageRepository.save(eatery.getImage());
         eateryRepository.save(eatery);
-        imageRepository.save(eatery.getImage());
         return true;
     }
+
+    @Override
+    public Image createEateryImage(Image image) {
+        return imageRepository.save(image);
+    }
+
+
 }

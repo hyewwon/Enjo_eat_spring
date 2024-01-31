@@ -57,4 +57,5 @@ public class EateryServiceImpl implements EateryService {
         Eatery eatery = requestDTO.toEntity();
         return eateryDAO.createEatery(eatery);
     }
+
 }

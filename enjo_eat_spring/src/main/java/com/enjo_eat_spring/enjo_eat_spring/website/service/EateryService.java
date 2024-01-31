@@ -2,6 +2,7 @@ package com.enjo_eat_spring.enjo_eat_spring.website.service;
 
 import com.enjo_eat_spring.enjo_eat_spring.data.dto.EateryDTO;
 import com.enjo_eat_spring.enjo_eat_spring.data.dto.ImageDTO;
+import com.enjo_eat_spring.enjo_eat_spring.data.entity.Image;
 
 import java.util.List;
 
