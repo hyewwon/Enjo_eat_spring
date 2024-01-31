@@ -2,6 +2,7 @@ package com.enjo_eat_spring.enjo_eat_spring.data.dto;
 
 import com.enjo_eat_spring.enjo_eat_spring.data.entity.EateryGroup;
 import com.enjo_eat_spring.enjo_eat_spring.data.entity.User;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 public class EateryGroupDTO {
@@ -11,9 +12,15 @@ public class EateryGroupDTO {
     @Getter
     @Builder
     public static class RequestDTO{
+        @NotBlank
         private String groupName;
+
+        @NotBlank
         private String groupComment;
+
+        @NotBlank
         private String groupLocation;
+
         private User user;
 
         public void setUser(User user) {
