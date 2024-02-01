@@ -1,3 +1,4 @@
+const username = document.getElementById("username");
 const eatery_name = document.getElementById("eatery_name");
 const show_location = document.getElementById("show_location");
 const eatery_real_location = document.getElementById("eatery_real_location");
@@ -54,19 +55,21 @@ async function createEatery(){
         return false;
     }
     try{
-        const response=await fetch(`/eatery-api/eatery-create/${group_id}`,{
+        const form = new FormData();
+        const data = JSON.stringify({
+            "eateryName": eatery_name.value,
+            "eateryType" : eatery_type.value,
+            "eateryRealLocation" : eatery_real_location.value,
+            "eateryLocation" : show_location.value,
+            "comment" : comment.value
+        })
+        const blob = new Blob([data], { type : "application/json"})
+        form.append("requestDTO", blob);
+        form.append("eateryImage", user_image.files[0]);
+        const response =await fetch(`/eatery-api/eatery-create/${group_id.value}`,{
             method:'POST',
-            headers: {csrf_header : csrf_token, "Content-Type" : "application/json"},
-            body: JSON.stringify({
-                "eateryName" : eatery_name.value,
-                "eateryRealLocation" : eatery_real_location.value,
-                "eateryLocation" : show_location.value,
-                "eateryType" : eatery_type.value,
-                "user_image" : user_image.value,
-                "comment" : comment.value,
-
-
-            }),
+            headers: {},
+            body: form,
         })
         const result = await response.json();
         if(response.status !== 200){
@@ -79,13 +82,6 @@ async function createEatery(){
         alert(error);
     }
 }
-btn_submit.addEventListener("click", async () => {
-    if (validation() == false) {
-        return false;
-    }
-    // regist_form.submit();
-    alert("등록 완료!")
-})
 
 // 유효성 검사
 function validation() {
@@ -119,6 +115,11 @@ function validation() {
 comment.oninput = function () {
     document.getElementById("comment_error").innerHTML = "";
 }
+
+user_image.oninput = function (){
+    document.getElementById("image_error").innerHTML = "";
+}
+
 
 
 //----------------카카오 지도 api------------------------------------

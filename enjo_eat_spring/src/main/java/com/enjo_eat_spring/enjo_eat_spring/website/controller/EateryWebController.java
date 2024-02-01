@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,8 +41,10 @@ public class EateryWebController {
 
     @GetMapping("/eatery-create/{groupId}")
     public String createEatery(Model model, @PathVariable Long groupId){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         EateryGroupDTO.ResponseDTO eateryGroup = eateryGroupService.getGroup(groupId);
         model.addAttribute("eateryGroup", eateryGroup);
+        model.addAttribute("username", authentication.getName());
         return "eatery/eatery_create";
     }
 

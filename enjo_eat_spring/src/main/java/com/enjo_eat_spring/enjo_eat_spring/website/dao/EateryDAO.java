@@ -9,5 +9,6 @@ import java.util.List;
 public interface EateryDAO {
     List<Eatery> getEateryList(Long groupId);
     Boolean createEatery(Eatery eatery);
-    Image createEateryImage(Image image);
+    Long createEateryImage(Image image);
+    Image getEateryImage(Long imageId);
 }

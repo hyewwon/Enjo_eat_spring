@@ -26,4 +26,24 @@ public class ImageDTO {
                     .build();
         }
     }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    @Getter
+    public static class ResponseDTO{
+        private Long id;
+        private String imageName;
+        private String originImageName;
+        private String imagePath;
+
+        public ResponseDTO toDTO(Image image){
+            return ResponseDTO.builder()
+                    .id(image.getId())
+                    .imageName(image.getImageName())
+                    .originImageName(image.getOriginImageName())
+                    .imagePath(image.getImagePath())
+                    .build();
+        }
+    }
 }

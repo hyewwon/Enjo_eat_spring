@@ -12,15 +12,9 @@ public class EateryGroupDTO {
     @Getter
     @Builder
     public static class RequestDTO{
-        @NotBlank
         private String groupName;
-
-        @NotBlank
         private String groupComment;
-
-        @NotBlank
         private String groupLocation;
-
         private User user;
 
         public void setUser(User user) {

@@ -47,15 +47,21 @@ public class EateryServiceImpl implements EateryService {
     }
 
     @Override
-    public Boolean createEatery(EateryDTO.RequestDTO requestDTO, ImageDTO.RequestDTO imageDTO, Long groupId, String username) {
+    public Boolean createEatery(EateryDTO.RequestDTO requestDTO, Long imageId, Long groupId, String username) {
         User user = authDAO.getUser(username);
         EateryGroup eateryGroup = eateryGroupDAO.getGroup(groupId);
-        Image image = imageDTO.toEntity();
+        Image image = eateryDAO.getEateryImage(imageId);
         requestDTO.setUser(user);
         requestDTO.setGroup(eateryGroup);
         requestDTO.setImage(image);
         Eatery eatery = requestDTO.toEntity();
         return eateryDAO.createEatery(eatery);
+    }
+
+    @Override
+    public Long createEateryImage(ImageDTO.RequestDTO imageDTO) {
+        Image image = imageDTO.toEntity();
+        return eateryDAO.createEateryImage(image);
     }
 
 }

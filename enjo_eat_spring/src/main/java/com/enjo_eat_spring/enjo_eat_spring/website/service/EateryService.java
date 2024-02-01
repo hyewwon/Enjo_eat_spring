@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface EateryService {
     List<EateryDTO.ListResponseDTO> getEateryList(Long groupId);
-    Boolean createEatery(EateryDTO.RequestDTO requestDTO, ImageDTO.RequestDTO imageDTO, Long groupId, String username);
+    Boolean createEatery(EateryDTO.RequestDTO requestDTO, Long imageId, Long groupId, String username);
+    Long createEateryImage(ImageDTO.RequestDTO imageDTO);
 }

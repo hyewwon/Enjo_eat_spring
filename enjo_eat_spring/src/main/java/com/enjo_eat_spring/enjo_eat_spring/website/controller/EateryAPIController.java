@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,22 +34,23 @@ public class EateryAPIController {
         this.eateryService = eateryService;
     }
 
-    @PostMapping("/eatery-create/{groupId}")
-    public ResponseEntity<SuccessResponse<Boolean>> createEatery(@RequestBody EateryDTO.RequestDTO requestDTO, MultipartFile image, @PathVariable Long groupId) throws IOException {
+    @PostMapping(value = "/eatery-create/{groupId}",  consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<SuccessResponse<Boolean>> createEatery(@RequestPart EateryDTO.RequestDTO requestDTO, @RequestPart MultipartFile eateryImage, @PathVariable Long groupId) throws IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication == null){
             throw new UsernameNotFoundException("권한이 없습니다.");
         }
 
         // 이미지 저장
-        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\image";
+        String projectPath = System.getProperty("user.dir") + "\\enjo_eat_spring\\src\\main\\resources\\static\\image";
         UUID uuid = UUID.randomUUID();
-        String fileName = uuid + "_" + image.getOriginalFilename();
+        String fileName = uuid + "_" + eateryImage.getOriginalFilename();
         File saveFile = new File(projectPath, fileName);
-        image.transferTo(saveFile);
-        ImageDTO.RequestDTO imageDTO = new ImageDTO.RequestDTO(fileName, image.getOriginalFilename(), projectPath);
+        eateryImage.transferTo(saveFile);
+        ImageDTO.RequestDTO imageDTO = new ImageDTO.RequestDTO(fileName, eateryImage.getOriginalFilename(), projectPath);
 
-        Boolean result = eateryService.createEatery(requestDTO, imageDTO, groupId, authentication.getName());
+        Long imageId = eateryService.createEateryImage(imageDTO);
+        Boolean result = eateryService.createEatery(requestDTO, imageId, groupId, authentication.getName());
         SuccessResponse<Boolean> response = SuccessResponse.of(SuccessCode.INSERT_SUCCESS, result);
         return ResponseEntity.status(HttpStatus.OK).body(response);
 

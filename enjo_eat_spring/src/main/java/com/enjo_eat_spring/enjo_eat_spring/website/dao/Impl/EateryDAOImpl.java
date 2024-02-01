@@ -36,14 +36,20 @@ public class EateryDAOImpl implements EateryDAO {
     @Override
     @Transactional
     public Boolean createEatery(Eatery eatery) {
-        Image image = imageRepository.save(eatery.getImage());
         eateryRepository.save(eatery);
         return true;
     }
 
     @Override
-    public Image createEateryImage(Image image) {
-        return imageRepository.save(image);
+    public Long createEateryImage(Image image) {
+        return imageRepository.save(image).getId();
+    }
+
+    @Override
+    public Image getEateryImage(Long imageId) {
+        return imageRepository.findById(imageId).orElseThrow(
+                () -> new IllegalArgumentException("존재하지 않는 이미지 입니다")
+        );
     }
 
 
