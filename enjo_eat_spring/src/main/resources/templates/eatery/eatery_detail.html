@@ -1,119 +1,142 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
-<div class="breadcrumbs">
-    <div class="container">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout">
+<th:block layout:fragment="content">
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2></h2>
+                <ol>
+                    <li><a href="/">Home</a></li>
+                    <li>Eatery Detail</li>
+                </ol>
+            </div>
 
-        <div class="d-flex justify-content-between align-items-center">
-            <h2></h2>
-            <ol>
-                <li><a href="/">Home</a></li>
-                <li>Eatery Detail</li>
-            </ol>
         </div>
-        
-    </div>
-</div><!-- End Breadcrumbs -->
+    </div><!-- End Breadcrumbs -->
 
-<!-- ======= Blog Details Section ======= -->
-<section id="blog" class="blog">
-    <div class="container" data-aos="fade-up">
-        <div class="container mb-5">
-            <a href="{% url 'Eatery:eatery_manage' group_pk %}" type="button" class="btn btn-outline-dark" style="">돌아가기</a>
-            {% if request.session.userid == eatery.user.userid %}
-                <input type="hidden" value="{{eatery.id}}" id="eatery_id" name="eatery_id">
-                <a href="" id="btn_eatery_delete" type="button" class="btn btn-outline-danger" style="float: right; margin-left:10px;">삭제하기</a>
-                <a href="{% url 'Eatery:eatery_edit' eatery.id %}" type="button" class="btn btn-outline-warning" style="float: right;">수정하기</a>
-            {% endif %}
-        </div>
+    <!-- ======= Blog Details Section ======= -->
+    <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up">
+            <div class="container mb-5">
+                <a href="" type="button" class="btn btn-outline-dark" style="">돌아가기</a>
+                <!--            {% if request.session.userid == eatery.user.userid %}-->
+                <!--                <input type="hidden" value="{{eatery.id}}" id="eatery_id" name="eatery_id">-->
+                <!--                <a href="" id="btn_eatery_delete" type="button" class="btn btn-outline-danger" style="float: right; margin-left:10px;">삭제하기</a>-->
+                <!--                <a href="{% url 'Eatery:eatery_edit' eatery.id %}" type="button" class="btn btn-outline-warning" style="float: right;">수정하기</a>-->
+                <!--            {% endif %}-->
+            </div>
 
-        <article class="blog-details row mb-3" style="margin-right:0;margin-left:0;"> 
-            <div class="col-8">
-                <div class="post-img">
-                    <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+            <article class="blog-details row mb-3" style="margin-right:0;margin-left:0;">
+                <div class="col-8">
+                    <h2 class="title" id="eatery-name" th:text="${eatery.getEateryName()}"></h2>
+                    <div class="meta-top">
+                        <ul>
+                            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <span
+                                    th:text="${eatery.getUsername()}"></span></li>
+                        </ul>
+                    </div><!-- End meta top -->
+
+                    <div class="content">
+                        <p>
+                            종류 : <span th:text="${eatery.getEateryType()}"></span>
+                        </p>
+                        <p>
+                            위치 : <span th:text="${eatery.getEateryLocation()}"></span>
+                        </p>
+                    </div><!-- End post content -->
                 </div>
-    
-                <h2 class="title">{{eatery.eatery_name}}</h2>
-    
-                <div class="meta-top">
-                    <ul>
-                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>{{eatery.user.userid}}</li>
-                    </ul>
-                </div><!-- End meta top -->
-    
+                <div class="col-4" style="margin:auto;text-align:center;">
+                    <th:block th:if="${eatery.getImage()}">
+                        <img th:src="${eatery.getImage().getImagePath() + eatery.getImage().getImageName()}"
+                             class="img-fluid" style="width:250px;" alt="">
+                    </th:block>
+                    <th:block th:unless="${eatery.getImage()}">
+                        <img th:src="@{/assets/img/home.png}" class="img-fluid" alt="" style="width:250px;">
+                    </th:block>
+                </div>
+            </article>
+
+            <article class="blog-details">
+                <h4>식당위치</h4>
                 <div class="content">
-                    <p>
-                        종류 : {{eatery.eatery_type}}
-                    </p>
-                    <p>
-                        위치 : {{eatery.eatery_location}}
-                    </p>
-                    좋아요
-                </div><!-- End post content -->
-            </div>
-            <div class="col-4" style="margin:auto;text-align:center;">
-                {% if eatery.image  %}
-                <img src="{{eatery.image.url}}" class="img-fluid" style="width:250px;" alt="">
-                {% elif eatery.crawling_image %}
-                <img src="/{{eatery.crawling_image}}" class="img-fluid" alt="" style="width:250px;">
-                {% else %}
-                <img src="{% static 'assets/img/home.png' %}" class="img-fluid" alt="" style="width:250px;">
-                {% endif %}
-            </div>
-        </article><!-- End blog post -->
-            
-        <article class="blog-details">
-            <h4>식당위치</h4>
-            <div class="content">
-                <input type="hidden" value="{{eatery.eatery_location}}" id="eatery_location">
-                <input type="hidden" value="{{eatery.eatery_name}}" id="eatery_name">
-                <div id="map" style="width:100%;height:350px;"></div>
-            </div><!-- End post content -->
-        </article><!-- End blog post -->
+                    <input type="hidden" th:value="${eatery.getEateryLocation()}" id="eatery_location">
+                    <div id="map" style="width:100%;height:350px;"></div>
+                </div>
+            </article>
 
-        <div class="post-author d-flex align-items-center">
-            <img src="assets/img/blog/blog-author.jpg" class="rounded-circle flex-shrink-0" alt="">
-            <div>
-                <h4 class="mb-2">등록자 후기&nbsp<i class="bi bi-chat-dots"></i></h4>
-                <p>
-                    {% if eatery.comment == "" %}
-                    한 줄평이 없습니다
-                    {% else %}
-                    {{eatery.comment}}
-                    {% endif %}
-                </p>
+            <div class="post-author d-flex align-items-center">
+                <div>
+                    <h4 class="mb-2">등록자 후기&nbsp<i class="bi bi-chat-dots"></i></h4>
+                    <th:block th:if="${eatery.getComment() == ''}">
+                        <p>한 줄평이 없습니다</p>!!
+                    </th:block>
+                    <th:block th:unless="${eatery.getComment() == ''}">
+                        <p th:text="${eatery.getComment()}"></p>
+                    </th:block>
+                </div>
             </div>
-        </div>
 
-        <div class="comments">
-            <div class="reply-form mb-5">
-                <h4>음식점에 대한 후기를 남겨주세요</h4>
-                <p>욕설은 안돼요...</p>
-                <form action="" method="post" enctype="multipart/form-data" id="reply_form">
-                    <div class="row">
-                        <div class="col form-group">
-                            작성자 : {{request.session.userid}}
-                            <input type="hidden" name="userid" id="userid" data-url="{% url 'Eatery:eatery_reply' eatery.id %}" value="{{request.session.userid}}">
+            <div class="comments">
+                <div class="reply-form mb-5">
+                    <h4>음식점에 대한 후기를 남겨주세요</h4>
+                    <p>욕설은 안돼요...</p>
+                    <form action="" method="post" enctype="multipart/form-data" id="reply_form">
+                        <div class="row">
+                            <div class="col form-group">
+                                작성자 : <span th:text="${username}"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
+                                <textarea name="reply" id="reply" class="form-control"
+                                          placeholder="후기를 남겨주세요"></textarea>
+                                <div id="reply_error"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <button id="btn_reply" class="btn btn-warning"
+                            th:onclick="'createReply(' + ${eatery.getId()} +');'">작성하기
+                    </button>
+                </div>
+
+                <h4 class="comments-count"><span th:text="${eatery.getReply().size()}"></span> 개 후기</h4>
+                <th:block th:if="${eatery.getReply().size() > 0}">
+                    <div th:each="reply : ${eatery.getReply()}" id="comment-4" class="comment">
+                        <input type="hidden" id="reply_id" value="{{reply.id}}">
+                        <div class="row d-flex">
+                            <div class="col-10">
+                                <h5 th:text="${reply.getUser().getUsername()}"></h5>
+                                <time datetime="2020-01-01" th:text="${reply.getCreatedAt()}"></time>
+                                <p th:text="${reply.getReply()}"></p>
+                            </div>
+                            <th:block th:if="${username == reply.getUser().getUsername()}">
+                                <div class="col-2">
+                                    <button th:onclick="'deleteReply(' + ${reply.getId()} + ');"
+                                            class="btn btn-dark btn-sm" style="float:right;">삭제
+                                    </button>
+                                </div>
+                            </th:block>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col form-group">
-                            <textarea name="reply" id="reply" class="form-control" placeholder="후기를 남겨주세요"></textarea>
-                            <div id="reply_error"></div>
+
+                </th:block>
+                <th:block th:unless="${eatery.getReply().size() > 0}">
+                    <div id="comment-4" class="comment">
+                        <div class="d-flex">
+                            <p>
+                                아직 후기가 없습니다.
+                            </p>
                         </div>
                     </div>
-                </form>
-                <button id="btn_reply" class="btn btn-warning">작성하기</button>
-            </div>
-
-            <div id="reply_list">
-                {{reply_list}}
+                </th:block>
             </div>
         </div>
-    </div>  
-</section>
-{% endblock content %}
-{% block script %}
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ece84f7a9edca4a7b0fa6dc9b18040bc&libraries=services"></script>
-<script src="{% static 'eatery/js/eatery_detail.js' %}"></script>
-{% endblock script %}
+    </section>
+</th:block>
+<th:block layout:fragment="script">
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4a2b0a3e43ce8ee1ab85ad7d9eebaa3c&libraries=services"></script>
+    <script type="text/javascript" th:src="@{/js/eatery/eatery_detail.js}"></script>
+</th:block>
+</html>

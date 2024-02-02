@@ -64,4 +64,11 @@ public class EateryServiceImpl implements EateryService {
         return eateryDAO.createEateryImage(image);
     }
 
+    @Override
+    public EateryDTO.ResponseDTO getEatery(Long eateryId) {
+        Eatery eatery = eateryDAO.getEatery(eateryId);
+        EateryDTO.ResponseDTO eateryDTO = new EateryDTO.ResponseDTO();
+        return eateryDTO.toDto(eatery);
+    }
+
 }

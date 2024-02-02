@@ -52,5 +52,11 @@ public class EateryDAOImpl implements EateryDAO {
         );
     }
 
+    @Override
+    public Eatery getEatery(Long eateryId) {
+        return eateryRepository.findById(eateryId).orElseThrow(
+                () -> new IllegalArgumentException("존재하지 않는 후기입니다.")
+        );
+    }
 
 }

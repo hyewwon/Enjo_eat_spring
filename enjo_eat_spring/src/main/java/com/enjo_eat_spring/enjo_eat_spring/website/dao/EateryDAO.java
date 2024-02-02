@@ -11,4 +11,5 @@ public interface EateryDAO {
     Boolean createEatery(Eatery eatery);
     Long createEateryImage(Image image);
     Image getEateryImage(Long imageId);
+    Eatery getEatery(Long eateryId);
 }

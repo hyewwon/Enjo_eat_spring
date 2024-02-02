@@ -42,12 +42,12 @@ public class EateryAPIController {
         }
 
         // 이미지 저장
-        String projectPath = System.getProperty("user.dir") + "\\enjo_eat_spring\\src\\main\\resources\\static\\image";
+        String projectPath = System.getProperty("user.dir") + "\\enjo_eat_spring\\src\\main\\resources\\static\\eatery_image";
         UUID uuid = UUID.randomUUID();
         String fileName = uuid + "_" + eateryImage.getOriginalFilename();
         File saveFile = new File(projectPath, fileName);
         eateryImage.transferTo(saveFile);
-        ImageDTO.RequestDTO imageDTO = new ImageDTO.RequestDTO(fileName, eateryImage.getOriginalFilename(), projectPath);
+        ImageDTO.RequestDTO imageDTO = new ImageDTO.RequestDTO(fileName, eateryImage.getOriginalFilename(), "\\eatery_image\\");
 
         Long imageId = eateryService.createEateryImage(imageDTO);
         Boolean result = eateryService.createEatery(requestDTO, imageId, groupId, authentication.getName());
@@ -55,4 +55,5 @@ public class EateryAPIController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
 
     }
+
 }
