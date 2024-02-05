@@ -35,4 +35,15 @@ public class ReplyAPIController {
         SuccessResponse<Boolean> response = SuccessResponse.of(SuccessCode.INSERT_SUCCESS, result);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @DeleteMapping(value = "/reply-delete/{replyId}")
+    public ResponseEntity<SuccessResponse<Boolean>> deleteReply(@PathVariable Long replyId){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null){
+            throw new UsernameNotFoundException("권한이 없습니다.");
+        }
+        Boolean result = replyService.deleteReply(replyId, authentication.getName());
+        SuccessResponse<Boolean> response = SuccessResponse.of(SuccessCode.DELETE_SUCCESS, result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }

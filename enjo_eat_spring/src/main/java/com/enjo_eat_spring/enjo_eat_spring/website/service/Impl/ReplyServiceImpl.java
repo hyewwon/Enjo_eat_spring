@@ -11,6 +11,9 @@ import com.enjo_eat_spring.enjo_eat_spring.website.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ReplyServiceImpl implements ReplyService {
     ReplyDAO replyDAO;
@@ -25,6 +28,23 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
+    public List<ReplyDTO.ResponseDTO> getRelies(Long eateryId) {
+        List<Reply> replyList = replyDAO.getReplyList(eateryId);
+        List<ReplyDTO.ResponseDTO> responseDTOList = new ArrayList<>();
+        for(Reply reply : replyList){
+            ReplyDTO.ResponseDTO responseDTO = ReplyDTO.ResponseDTO.builder()
+                    .id(reply.getId())
+                    .reply(reply.getReply())
+                    .user(reply.getUser())
+                    .createdAt(reply.getCreatedAt())
+                    .build();
+            responseDTOList.add(responseDTO);
+        }
+
+        return responseDTOList;
+    }
+
+    @Override
     public Boolean createReply(ReplyDTO.RequestDTO requestDTO, Long eateryId, String username) {
         User user = authDAO.getUser(username);
         Eatery eatery = eateryDAO.getEatery(eateryId);
@@ -33,4 +53,11 @@ public class ReplyServiceImpl implements ReplyService {
         Reply reply = requestDTO.toEntity();
         return replyDAO.createReply(reply);
     }
+
+    @Override
+    public Boolean deleteReply(Long replyId, String username) {
+        User user = authDAO.getUser(username);
+        return replyDAO.deleteReply(replyId, user);
+    }
+
 }

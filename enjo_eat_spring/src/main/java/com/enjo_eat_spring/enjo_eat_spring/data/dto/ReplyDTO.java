@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 public class ReplyDTO {
 
     @NoArgsConstructor
@@ -31,6 +33,26 @@ public class ReplyDTO {
                     .reply(reply)
                     .user(user)
                     .eatery(eatery)
+                    .build();
+        }
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    @Getter
+    public static class ResponseDTO{
+        private Long id;
+        private String reply;
+        private User user;
+        private LocalDateTime createdAt;
+
+        public ResponseDTO toDTO(Reply reply){
+            return ResponseDTO.builder()
+                    .id(reply.getId())
+                    .reply(reply.getReply())
+                    .user(reply.getUser())
+                    .createdAt(reply.getCreatedAt())
                     .build();
         }
     }
