@@ -4,7 +4,6 @@
 <th:block layout:fragment="content">
     <div class="breadcrumbs">
         <div class="container">
-
             <div class="d-flex justify-content-between align-items-center">
                 <h2>메뉴</h2>
                 <ol>
@@ -21,9 +20,9 @@
             <section id="recent-blog-posts" class="recent-blog-posts">
                 <div class="container" data-aos="fade-up">
                   <th:block th:if="${eateries.size() > 0}">
-                    <a href="" class="btn btn-warning" style="float: right;">음식점 추가하기</a>
+                    <a th:href="@{/eatery/eatery-create/{gid}(gid = ${groupId})}" class="btn btn-warning" style="float: right;">음식점 추가하기</a>
                   </th:block>
-                    <a th:href="@{/group/group-manage}" class="btn btn-outline-dark">돌아가기</a>
+                    <a th:href="@{/eatery-group/group-manage}" class="btn btn-outline-dark">돌아가기</a>
                     <div class="section-header">
                         <h2>Eatery</h2>
                         <p>음식점들의 후기를 써보세요</p>
@@ -33,15 +32,18 @@
                             <div th:each="eatery : ${eateries}" class="col-lg-3 mb-5" data-aos="fade-up" data-aos-delay="200">
                                 <div class="post-box">
                                     <div class="post-img">
-<!--                                        <img src="{{e.image.url}}" class="img-fluid" alt="">-->
-<!--                                        <img src="/{{e.crawling_image}}" class="img-fluid" alt="">-->
-<!--                                        <img src="{% static 'assets/img/home.png' %}" class="img-fluid" alt="">-->
+                                        <th:block th:if="${eatery.getImage()}">
+                                            <img th:src="${eatery.getImage().getImagePath() + eatery.getImage().getImageName()}" class="img-fluid" alt="">
+                                        </th:block>
+                                        <th:block th:unless="${eatery.getImage()}">
+                                            <img th:src="@{/assets/img/home.png}" class="img-fluid" alt="">
+                                        </th:block>
                                     </div>
                                     <h3 class="post-title" th:text="${eatery.eateryName}"></h3>
                                     <div class="meta">
                                         <span class="post-author" th:text="${eatery.eateryType}"></span>
                                     </div>
-                                    <a href="" class="readmore stretched-link"><span>자세히 보러가기</span><i class="bi bi-arrow-right"></i></a>
+                                    <a th:href="@{/eatery/eatery-detail/{eateryId}(eateryId = ${eatery.getId()})}" class="readmore stretched-link"><span>자세히 보러가기</span><i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </div>
                         </th:block>

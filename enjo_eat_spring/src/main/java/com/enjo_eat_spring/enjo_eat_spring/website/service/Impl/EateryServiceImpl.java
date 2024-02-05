@@ -38,6 +38,7 @@ public class EateryServiceImpl implements EateryService {
                     .id(eatery.getId())
                     .eateryName(eatery.getEateryName())
                     .eateryType(eatery.getEateryType())
+                    .image(eatery.getImage())
                     .user(eatery.getUser())
                     .groupId(eatery.getGroup().getId())
                     .build();

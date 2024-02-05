@@ -4,18 +4,14 @@
         <header id="header" class="header fixed-top" data-scrollto-offset="0">
             <div class="container-fluid d-flex align-items-center justify-content-between">
                 <a th:href="@{/}" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
-                    <!-- Uncomment the line below if you also wish to use an image logo -->
-                    <!-- <img src="assets/img/logo.png" alt=""> -->
                     <h1>Enjo_eat<span>.</span></h1>
                 </a>
                 <div style="float: right;margin-right:50px;" class="">
                     환영합니다 😀&nbsp;&nbsp;&nbsp;
                     <a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
-                    <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/my-page}" class="p-2">마이페이지</a>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="p-2">로그아웃</a>
                 </div>
-<!--                <div style="float: right;margin-right:50px;" class="">-->
-<!--                    <a href="">로그인</a>-->
-<!--                </div>-->
             </div>
         </header><!-- End Header -->
     </div>

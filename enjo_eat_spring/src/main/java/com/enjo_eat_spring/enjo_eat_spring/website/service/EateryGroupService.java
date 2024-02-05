@@ -10,4 +10,5 @@ public interface EateryGroupService {
     Long createGroup(EateryGroupDTO.RequestDTO RequestDTO, String username);
     Long updateGroup(EateryGroupDTO.RequestDTO RequestDTO, Long groupId, String username);
     Boolean deleteGroup(Long groupId, String username);
+    List<EateryGroupDTO.ResponseDTO> getGroupListByUser(String username);
 }

@@ -19,7 +19,7 @@
     <section id="blog" class="blog">
         <div class="container" data-aos="fade-up">
             <div class="container mb-5">
-                <a href="" type="button" class="btn btn-outline-dark" style="">돌아가기</a>
+                <a th:href="@{/eatery/eatery-manage/{groupId}(groupId = ${eatery.getGroupId()})}" type="button" class="btn btn-outline-dark" style="">돌아가기</a>
                 <!--            {% if request.session.userid == eatery.user.userid %}-->
                 <!--                <input type="hidden" value="{{eatery.id}}" id="eatery_id" name="eatery_id">-->
                 <!--                <a href="" id="btn_eatery_delete" type="button" class="btn btn-outline-danger" style="float: right; margin-left:10px;">삭제하기</a>-->
@@ -101,28 +101,27 @@
                 </div>
 
                 <h4 class="comments-count"><span th:text="${eatery.getReply().size()}"></span> 개 후기</h4>
-                <th:block th:if="${eatery.getReply().size() > 0}">
-                    <div th:each="reply : ${eatery.getReply()}" id="comment-4" class="comment">
-                        <input type="hidden" id="reply_id" value="{{reply.id}}">
+                <th:block th:if="${replies.size() > 0}">
+                    <div th:each="reply : ${replies}" id="comment-4" class="comment">
+                        <input type="hidden" id="reply_id" th:value="${reply.getId()}">
                         <div class="row d-flex">
                             <div class="col-10">
-                                <h5 th:text="${reply.getUser().getUsername()}"></h5>
-                                <time datetime="2020-01-01" th:text="${reply.getCreatedAt()}"></time>
+                                <p class="m-0"><small th:text="${reply.user.username}"></small></p>
+                                <p><small th:text="${reply.getCreatedAt()}"></small></p>
                                 <p th:text="${reply.getReply()}"></p>
                             </div>
-                            <th:block th:if="${username == reply.getUser().getUsername()}">
+                            <th:block th:if="${#strings.equals(username, reply.user.username)}">
                                 <div class="col-2">
-                                    <button th:onclick="'deleteReply(' + ${reply.getId()} + ');"
+                                    <button th:onclick="'deleteReply(' + ${reply.getId()} + ');'"
                                             class="btn btn-dark btn-sm" style="float:right;">삭제
                                     </button>
                                 </div>
                             </th:block>
                         </div>
                     </div>
-
                 </th:block>
-                <th:block th:unless="${eatery.getReply().size() > 0}">
-                    <div id="comment-4" class="comment">
+                <th:block th:unless="${replies.size() > 0}">
+                    <div class="comment">
                         <div class="d-flex">
                             <p>
                                 아직 후기가 없습니다.

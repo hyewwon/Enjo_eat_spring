@@ -31,14 +31,17 @@
                     <input type="hidden" th:value="${group.id}" id="group-id">
                     <div class="row" id="input">
                         <div class="form-group mt-3">
+                            <label for="name" class="form-label">테마 이름</label>
                             <input type="text" th:value="${group.groupName}" class="form-control" name="name" id="name" data-rule="minlen:1" placeholder="이름을 작성해 주세요">
                             <div id="name_error"></div>
                         </div>
                         <div class="form-group mt-3">
+                            <label for="location" class="form-label">테마 지역</label>
                             <input type="text" th:value="${group.groupLocation}"class="form-control" name="location" id="location" data-rule="minlen:1" placeholder="식당들이 있는 주요지역을 작성해주세요">
                             <div id="location_error"></div>
                         </div>
                         <div class="form-group mt-3">
+                            <label for="comment" class="form-label">테마 소개</label>
                             <input type="text" th:value="${group.groupComment}" class="form-control" name="comment" id="comment" data-rule="minlen:1" placeholder="간단한 테마 소개를 작성해주세요">
                             <div id="comment_error"></div>
                         </div>

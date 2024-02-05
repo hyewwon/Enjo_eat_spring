@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/default_layout">
+<th:block layout:fragment="content">
+<style>
+  #group_box{
+    width:300px;
+    height:175px;
+    border:1px solid orange;
+    box-shadow: 5px 5px 5px lightgray;
+  }
+</style>
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>MyPage</h2>
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li>MyPage</li>
+      </ol>
+    </div>
+
+  </div>
+</div>
+<section class="sample-page">
+  <div class="container" data-aos="fade-up">
+    <section id="recent-blog-posts" class="recent-blog-posts">
+      <div class="container" data-aos="fade-up">
+        <div class="section-header">
+          <h2>My theme</h2>
+          <p>내가 등록한 테마 입니다</p>
+        </div>
+        <div class="row">
+          <th:block th:if="${groups.size() > 0}">
+            <div th:each="group : ${groups}" class="col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="200" id="group_box" style="margin:12px;">
+              <a href="" type="button" class="btn btn-outline-danger btn-sm mt-2" style="float: right;">수정</a>
+              <div class="post-box">
+                <h4 class="post-title" th:text="${group.getGroupName()}"></h4>
+                <p class="form-text" th:text="'주요 지역 : ' + ${group.getGroupLocation()}">주요 지역 : {{group.group_location}}</p>
+                <p class="form-text" th:text="${group.getGroupComment()}"></p>
+                <a href="" class="readmore stretched-link"><span>등록된 메뉴 보러가기</span><i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+          </th:block>
+          <th:block th:unless="${groups.size() > 0}">
+            <div class="c`ol-12 text-center" style="margin-top:50px;">
+              <h6>등록한 게시물이 없습니다</h6>
+            </div>
+          </th:block>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+</th:block>
+</html>

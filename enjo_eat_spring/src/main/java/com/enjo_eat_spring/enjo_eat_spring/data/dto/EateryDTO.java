@@ -91,6 +91,7 @@ public class EateryDTO {
         private Long id;
         private String eateryName;
         private String eateryType;
+        private Image image;
         private User user;
         private Long groupId;
     }
@@ -99,6 +100,7 @@ public class EateryDTO {
         return ListResponseDTO.builder()
                 .id(eatery.getId())
                 .eateryName(eatery.getEateryName())
+                .image(eatery.getImage())
                 .user(eatery.getUser())
                 .groupId(eatery.getGroup().getId())
                 .build();

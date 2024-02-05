@@ -65,26 +65,26 @@ async function createReply(eateryId){
 
 
 // // 후기 삭제
-// async function deleteReply(id){
-//     if(!confirm("삭제하시겠습니까?")){
-//         return false;
-//     }
-//     try{
-//         const response = await fetch(userid.getAttribute("data-url"),{
-//             method:"DELETE",
-//             headers:{'X-CSRFToken': csrftoken},
-//             body:JSON.stringify({reply_id:id})
-//         })
-//         const result = await response.json();
-//         if(result.success == false){
-//             alert("후기 삭제 에러")
-//         }else{
-//             reply_list.innerHTML = result.reply_list;
-//         }
-//     }catch(error){
-//         alert(error)
-//     }
-// }
+async function deleteReply(id){
+    if(!confirm("삭제하시겠습니까?")){
+        return false;
+    }
+    try{
+        const response = await fetch(`/reply-api/reply-delete/${id}`,{
+            method:"DELETE",
+            headers:{csrf_header: csrf_token, 'Content-Type' : "application/json"},
+            body:JSON.stringify({reply_id:id})
+        })
+        const result = await response.json();
+        if(response.success !== 200){
+            alert("후기 삭제 에러.. 관리자에게 문의해주세요");
+        }else{
+            location.reload();
+        }
+    }catch(error){
+        alert(error)
+    }
+}
 
 
 

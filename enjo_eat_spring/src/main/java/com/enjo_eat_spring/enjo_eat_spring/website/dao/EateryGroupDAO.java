@@ -11,4 +11,5 @@ public interface EateryGroupDAO {
     Long createGroup(EateryGroup eateryGroup);
     Long updateGroup(EateryGroup eateryGroup, Long groupId);
     Boolean deleteGroup(Long groupId, User user);
+    List<EateryGroup> getGroupListByUser(User user);
 }

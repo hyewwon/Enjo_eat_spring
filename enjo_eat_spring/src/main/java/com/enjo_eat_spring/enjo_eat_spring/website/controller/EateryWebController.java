@@ -2,8 +2,10 @@ package com.enjo_eat_spring.enjo_eat_spring.website.controller;
 
 import com.enjo_eat_spring.enjo_eat_spring.data.dto.EateryDTO;
 import com.enjo_eat_spring.enjo_eat_spring.data.dto.EateryGroupDTO;
+import com.enjo_eat_spring.enjo_eat_spring.data.dto.ReplyDTO;
 import com.enjo_eat_spring.enjo_eat_spring.website.service.EateryGroupService;
 import com.enjo_eat_spring.enjo_eat_spring.website.service.EateryService;
+import com.enjo_eat_spring.enjo_eat_spring.website.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,18 +26,21 @@ import java.util.List;
 public class EateryWebController {
     EateryService eateryService;
     EateryGroupService eateryGroupService;
+    ReplyService replyService;
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    public EateryWebController(EateryService eateryService, EateryGroupService eateryGroupService){
+    public EateryWebController(EateryService eateryService, EateryGroupService eateryGroupService, ReplyService replyService){
         this.eateryService = eateryService;
         this.eateryGroupService = eateryGroupService;
+        this.replyService = replyService;
     }
 
     @GetMapping("/eatery-manage/{groupId}")
     public String getAllEateries(Model model, @PathVariable Long groupId){
         List<EateryDTO.ListResponseDTO> eateryList = eateryService.getEateryList(groupId);
         model.addAttribute("eateries", eateryList);
+        model.addAttribute("groupId", groupId);
         return "eatery/eatery_manage";
     }
 
@@ -51,8 +56,10 @@ public class EateryWebController {
     @GetMapping("/eatery-detail/{eateryId}")
     public String getEatery(Model model, @PathVariable Long eateryId){
         Authentication authentication  = SecurityContextHolder.getContext().getAuthentication();
-        EateryDTO.ResponseDTO responseDTO = eateryService.getEatery(eateryId);
-        model.addAttribute("eatery", responseDTO);
+        EateryDTO.ResponseDTO eateryResponseDTO = eateryService.getEatery(eateryId);
+        List<ReplyDTO.ResponseDTO> replyResponseList = replyService.getRelies(eateryId);
+        model.addAttribute("replies", replyResponseList);
+        model.addAttribute("eatery", eateryResponseDTO);
         model.addAttribute("username", authentication.getName());
         return "eatery/eatery_detail";
     }
