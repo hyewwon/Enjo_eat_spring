@@ -19,7 +19,7 @@
     <div class="container" data-aos="fade-up">
         <section id="contact" class="contact">
             <div class="container">
-                <a href="" type="button" class="btn btn-outline-dark" style="">돌아가기</a>
+                <a th:href="@{/my-group}" type="button" class="btn btn-outline-dark" style="">돌아가기</a>
                 <button class="btn btn-outline-danger" onclick="deleteGroup()" style="float: right;">삭제하기</button>
                 <div class="section-header">
                   <p>사용자들이 알기 쉽게 테마를 간단히 소개해주세요.</p>
@@ -48,7 +48,7 @@
                     </div>
                 </form>
                 <div class="row gy-5 gx-lg-5 mt-3">
-                    <div class="text-center mt-5"><button type="button" id="btn_submit" class="btn btn-warning btn-lg" onclick="updateGroup();">수정완료</button></div>
+                    <div class="text-center mt-5"><button type="button" id="btn_submit" class="btn btn-warning" onclick="updateGroup();">수정완료</button></div>
                 </div>
             </div>
         </section><!-- End Contact Section -->

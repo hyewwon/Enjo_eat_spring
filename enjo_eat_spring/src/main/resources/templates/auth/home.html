@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/default_layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout">
 <th:block layout:fragment="content">
     <section id="hero-animated" class="hero-animated d-flex align-items-center">
-        <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative" data-aos="zoom-out">
+        <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
+             data-aos="zoom-out">
             <img th:src="@{/assets/img/home.png}" class="img-fluid animated" style="width:200px;">
             <h2>Welcome to <span>Enjo_eat</span></h2>
             <p>메뉴를 선택하기 쉬워져요</p>
@@ -22,48 +24,44 @@
                 <p class="mb-2">&</p>
                 <p class="mb-2">다녀온 음식점을 평가해 보세요</p>
                 <p>↓</p>
-                <a href="" class="btn btn-outline-dark mt-4">등록된 음식점 보러가기</a>
+                <a th:href="@{/eatery-group/group-manage}" class="btn btn-outline-dark mt-4">등록된 음식점 보러가기</a>
             </div>
 
             <div class="row g-4 g-lg-5" data-aos="fade-up" data-aos-delay="200">
 
                 <div class="col-lg-15">
                     <!-- ======= Testimonials Section ======= -->
-                    <section id="testimonials" class="testimonials">
-                        <div class="container" data-aos="fade-up">
-
-                            <div class="testimonials-slider swiper">
-                                <div class="swiper-wrapper">
-                                    {% for e in eatery %}
-                                    <div class="swiper-slide">
-                                        <div class="testimonial-item row">
-                                            <div class="col-4">
-                                                {% if e.image %}
-                                                <img src="{{e.image.url}}" alt="" style="width:250px;height:250px;">
-                                                {% elif e.crawling_image %}
-                                                <img src="/{{e.crawling_image}}" alt="" style="width:250px;height:250px;">
-                                                {% endif %}
-                                            </div>
-                                            <div id="comment" class="col-8">
-                                                <h3 class="mb-3">{{e.eatery_name}}</h3>
-                                                <p>{{e.user__userid}}</p>
-                                                <p>
-                                                    <i class="bi bi-quote quote-icon-left"></i>
-                                                    {{e.comment}}
-                                                    <i class="bi bi-quote quote-icon-right"></i>
-                                                </p>
-                                                <div class="mt-4">
-                                                    <a href="" type="button" class="btn btn-outline-light">자세히 보기</a>
+                    <th:block th:if="${eateryTop5.size() > 0}">
+                        <section id="testimonials" class="testimonials">
+                            <div class="container" data-aos="fade-up">
+                                <div class="testimonials-slider swiper">
+                                    <div class="swiper-wrapper">
+                                        <div th:each="eatery : ${eateryTop5}" class="swiper-slide">
+                                            <div class="testimonial-item row">
+                                                <div class="col-4">
+                                                    <img th:src="${eatery.getImage().getImagePath() + eatery.getImage().getImageName()}" alt="" style="width:250px;height:250px;">
+                                                </div>
+                                                <div id="comment" class="col-8">
+                                                    <h3 class="mb-3" th:text="${eatery.getEateryName()}"></h3>
+                                                    <p th:text="${eatery.getUser().getUsername()}"></p>
+                                                    <p>
+                                                        <i class="bi bi-quote quote-icon-left"></i>
+                                                        <span th:text="${eatery.getComment()}"></span>
+                                                        <i class="bi bi-quote quote-icon-right"></i>
+                                                    </p>
+                                                    <div class="mt-4">
+                                                        <a th:href="@{/eatery/eatery-detail/{eateryId}(eateryId = ${eatery.getId()})}" type="button" class="btn btn-outline-light">자세히
+                                                            보기</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    {% endfor %}
+                                    <div class="swiper-pagination"></div>
                                 </div>
-                                <div class="swiper-pagination"></div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </th:block>
                 </div>
             </div>
         </div>

@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ReplyDAO {
     Boolean createReply(Reply reply);
-    List<Reply> getReplyList(Long eateryId);
     Boolean deleteReply(Long replyId, User user);
+    List<Reply> getReplyList(Long eateryId);
 }

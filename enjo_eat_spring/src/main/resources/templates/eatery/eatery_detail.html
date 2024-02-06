@@ -20,11 +20,11 @@
         <div class="container" data-aos="fade-up">
             <div class="container mb-5">
                 <a th:href="@{/eatery/eatery-manage/{groupId}(groupId = ${eatery.getGroupId()})}" type="button" class="btn btn-outline-dark" style="">돌아가기</a>
-                <!--            {% if request.session.userid == eatery.user.userid %}-->
-                <!--                <input type="hidden" value="{{eatery.id}}" id="eatery_id" name="eatery_id">-->
-                <!--                <a href="" id="btn_eatery_delete" type="button" class="btn btn-outline-danger" style="float: right; margin-left:10px;">삭제하기</a>-->
-                <!--                <a href="{% url 'Eatery:eatery_edit' eatery.id %}" type="button" class="btn btn-outline-warning" style="float: right;">수정하기</a>-->
-                <!--            {% endif %}-->
+                <th:block th:if="${#strings.equals(username, eatery.getUsername())}">
+                    <input type="hidden" th:value="${eatery.getGroupId()}" id="group-id">
+                    <a href="javascript:;" th:onclick="'deleteEatery(' +${eatery.getId()} + ')'" id="btn_eatery_delete" type="button" class="btn btn-outline-danger" style="float: right; margin-left:10px;">삭제하기</a>
+                    <a th:href="@{/eatery/eatery-edit/{eateryId}(eateryId = ${eatery.getId()})}" type="button" class="btn btn-outline-warning" style="float: right;">수정하기</a>
+                </th:block>
             </div>
 
             <article class="blog-details row mb-3" style="margin-right:0;margin-left:0;">

@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ReplyService {
     Boolean createReply(ReplyDTO.RequestDTO requestDTO, Long eateryId, String username);
-    List<ReplyDTO.ResponseDTO> getRelies(Long eateryId);
     Boolean deleteReply(Long replyId, String username);
+    List<ReplyDTO.ResponseDTO> getRelies(Long eateryId);
 }

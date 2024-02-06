@@ -64,4 +64,13 @@ public class EateryWebController {
         return "eatery/eatery_detail";
     }
 
+    @GetMapping("/eatery-edit/{eateryId}")
+    public String editEatery(Model model, @PathVariable Long eateryId){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        EateryDTO.ResponseDTO eateryResponseDTO = eateryService.getEatery(eateryId);
+        model.addAttribute("eatery", eateryResponseDTO);
+        model.addAttribute("username", authentication.getName());
+        return "eatery/eatery_edit";
+    }
+
 }

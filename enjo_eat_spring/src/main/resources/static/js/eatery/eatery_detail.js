@@ -1,34 +1,29 @@
 const reply = document.getElementById("reply");
 const btn_reply = document.getElementById("btn_reply");
-const btn_eatery_delete = document.getElementById("btn_eatery_delete");
 const eatery_id = document.getElementById("eatery_id");
 const eatery_location = document.getElementById("eatery_location");
 const eatery_name = document.getElementById("eatery-name");
+const group_id = document.getElementById("group-id");
 
-
-// if(btn_eatery_delete != null){
-//
-//     btn_eatery_delete.addEventListener("click", async() =>{
-//         if(!confirm("이 음식점을 삭제할까요?")){
-//             return false;
-//         }
-//         try{
-//             const response = await fetch('',{
-//                 method:"DELETE",
-//                 headers:{'X-CSRFToken': csrftoken},
-//             })
-//             const result = await response.json();
-//             if(result.success == false){
-//                 alert("음식점 삭제 실패");
-//             }else{
-//                 location.href = `/eatery/eatery_manage/${eatery_id.value}/`;
-//             }
-//         }catch{
-//
-//         }
-//     })
-//
-// }
+async function deleteEatery(id){
+    if(!confirm("이 음식점을 삭제할까요?")){
+        return false;
+    }
+    try{
+        const response = await fetch(`/eatery-api/eatery-delete/${id}`,{
+            method:"DELETE",
+            headers:{csrf_header: csrf_token, 'Content-Type' : "application/json"},
+        })
+        const result = await response.json();
+        if(response.status !== 200){
+            alert("음식점 삭제 실패.. 관리자에게 문의해주세요");
+        }else{
+            location.href = `/eatery/eatery-manage/${group_id.value}`;
+        }
+    }catch(error){
+        alert(error);
+    }
+}
 
 async function createReply(eateryId){
     if(reply.value === ""){
@@ -64,19 +59,20 @@ async function createReply(eateryId){
 }
 
 
-// // 후기 삭제
+// 후기 삭제
 async function deleteReply(id){
     if(!confirm("삭제하시겠습니까?")){
         return false;
     }
     try{
+        console.log(id)
         const response = await fetch(`/reply-api/reply-delete/${id}`,{
             method:"DELETE",
             headers:{csrf_header: csrf_token, 'Content-Type' : "application/json"},
             body:JSON.stringify({reply_id:id})
         })
         const result = await response.json();
-        if(response.success !== 200){
+        if(response.status !== 200){
             alert("후기 삭제 에러.. 관리자에게 문의해주세요");
         }else{
             location.reload();

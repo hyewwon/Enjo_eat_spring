@@ -72,4 +72,55 @@ public class EateryServiceImpl implements EateryService {
         return eateryDTO.toDto(eatery);
     }
 
+    @Override
+    public List<EateryDTO.ListResponseDTO> getEateryListByUser(Long groupId, String username) {
+        User user = authDAO.getUser(username);
+        List<Eatery> eateryList = eateryDAO.getEateryListByUser(groupId, user);
+        List<EateryDTO.ListResponseDTO> eateryDTOList = new ArrayList<>();
+        for(Eatery eatery: eateryList){
+            EateryDTO.ListResponseDTO eateryDTO = EateryDTO.ListResponseDTO.builder()
+                    .id(eatery.getId())
+                    .eateryName(eatery.getEateryName())
+                    .eateryType(eatery.getEateryType())
+                    .image(eatery.getImage())
+                    .user(eatery.getUser())
+                    .groupId(eatery.getGroup().getId())
+                    .build();
+            eateryDTOList.add(eateryDTO);
+        }
+        return eateryDTOList;
+    }
+
+    @Override
+    public List<EateryDTO.ListResponseDTO> getEateryListTop5() {
+        List<Eatery> eateryList = eateryDAO.getEateryListTop5();
+        List<EateryDTO.ListResponseDTO> eateryDTOList = new ArrayList<>();
+        for(Eatery eatery: eateryList){
+            EateryDTO.ListResponseDTO eateryDTO = EateryDTO.ListResponseDTO.builder()
+                    .id(eatery.getId())
+                    .eateryName(eatery.getEateryName())
+                    .eateryType(eatery.getEateryType())
+                    .comment(eatery.getComment())
+                    .image(eatery.getImage())
+                    .user(eatery.getUser())
+                    .groupId(eatery.getGroup().getId())
+                    .build();
+            eateryDTOList.add(eateryDTO);
+        }
+        return eateryDTOList;
+    }
+
+    @Override
+    public Boolean updateEatery(EateryDTO.RequestDTO requestDTO, Long eateryId, String username) {
+        User user = authDAO.getUser(username);
+        Eatery eatery = requestDTO.toEntity();
+        return eateryDAO.updateEatery(eatery, eateryId, user);
+    }
+
+    @Override
+    public Boolean deleteEatery(Long eateryId, String username) {
+        User user = authDAO.getUser(username);
+        return eateryDAO.deleteEatery(eateryId, user);
+    }
+
 }

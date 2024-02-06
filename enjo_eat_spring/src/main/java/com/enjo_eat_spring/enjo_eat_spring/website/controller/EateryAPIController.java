@@ -56,4 +56,26 @@ public class EateryAPIController {
 
     }
 
+    @PutMapping("/eatery-edit/{eateryId}")
+    public ResponseEntity<SuccessResponse<Boolean>> editEatery(@RequestBody EateryDTO.RequestDTO requestDTO, @PathVariable Long eateryId){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null){
+            throw new UsernameNotFoundException("권한이 없습니다.");
+        }
+        Boolean result = eateryService.updateEatery(requestDTO, eateryId, authentication.getName());
+        SuccessResponse<Boolean> response = SuccessResponse.of(SuccessCode.INSERT_SUCCESS, result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @DeleteMapping("/eatery-delete/{eateryId}")
+    public ResponseEntity<SuccessResponse<Boolean>> deleteEatery(@PathVariable Long eateryId){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null){
+            throw new UsernameNotFoundException("권한이 없습니다.");
+        }
+        Boolean result = eateryService.deleteEatery(eateryId, authentication.getName());
+        SuccessResponse<Boolean> response = SuccessResponse.of(SuccessCode.DELETE_SUCCESS, result);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 }

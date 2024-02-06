@@ -29,6 +29,9 @@ public class EateryGroup extends Base{
     @Column(name = "group_location")
     private String groupLocation;
 
+    @Column(name= "open_flag")
+    private int openFlag;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -37,10 +40,11 @@ public class EateryGroup extends Base{
     @Builder.Default
     private List<Eatery> eateries = new ArrayList<>();
 
-    public void update(String groupName, String groupComment, String groupLocation){
+    public void update(String groupName, String groupComment, String groupLocation, int openFlag){
         this.groupName = groupName;
         this.groupComment = groupComment;
         this.groupLocation = groupLocation;
+        this.openFlag = openFlag;
     }
 
 }

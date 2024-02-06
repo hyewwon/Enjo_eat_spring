@@ -15,6 +15,7 @@ public class EateryGroupDTO {
         private String groupName;
         private String groupComment;
         private String groupLocation;
+        private int openFlag;
         private User user;
 
         public void setUser(User user) {
@@ -26,6 +27,7 @@ public class EateryGroupDTO {
                     .groupName(groupName)
                     .groupComment(groupComment)
                     .groupLocation(groupLocation)
+                    .openFlag(openFlag)
                     .user(user)
                     .build();
         }
@@ -40,6 +42,7 @@ public class EateryGroupDTO {
         private String groupName;
         private String groupComment;
         private String groupLocation;
+        private int openFlag;
         private User user;
 
         public ResponseDTO toDto(EateryGroup eateryGroup){
@@ -48,6 +51,7 @@ public class EateryGroupDTO {
                     .groupName(eateryGroup.getGroupName())
                     .groupComment(eateryGroup.getGroupComment())
                     .groupLocation(eateryGroup.getGroupComment())
+                    .openFlag(eateryGroup.getOpenFlag())
                     .user(eateryGroup.getUser())
                     .build();
         }

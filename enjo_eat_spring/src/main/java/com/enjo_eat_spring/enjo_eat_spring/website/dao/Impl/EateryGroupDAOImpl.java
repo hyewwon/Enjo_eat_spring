@@ -1,6 +1,5 @@
 package com.enjo_eat_spring.enjo_eat_spring.website.dao.Impl;
 
-import com.enjo_eat_spring.enjo_eat_spring.data.entity.Eatery;
 import com.enjo_eat_spring.enjo_eat_spring.data.entity.EateryGroup;
 import com.enjo_eat_spring.enjo_eat_spring.data.entity.User;
 import com.enjo_eat_spring.enjo_eat_spring.data.repository.EateryGroupRepository;
@@ -50,7 +49,7 @@ public class EateryGroupDAOImpl implements EateryGroupDAO {
         if(group.getUser() != eateryGroup.getUser()){
             throw new UsernameNotFoundException("수정 권한이 없습니다.");
         }
-        group.update(eateryGroup.getGroupName(), eateryGroup.getGroupComment(), eateryGroup.getGroupLocation());
+        group.update(eateryGroup.getGroupName(), eateryGroup.getGroupComment(), eateryGroup.getGroupLocation(), eateryGroup.getOpenFlag());
         eateryGroupRepository.save(group);
         return group.getId();
     }
@@ -62,7 +61,7 @@ public class EateryGroupDAOImpl implements EateryGroupDAO {
                 () -> new IllegalArgumentException("존재하지 않는 그룹입니다.")
         );
         if(eateryGroup.getUser() != user){
-            throw  new UsernameNotFoundException("수정 권한이 없습니다");
+            throw  new UsernameNotFoundException("삭제 권한이 없습니다");
         }
         eateryGroupRepository.delete(eateryGroup);
         return true;

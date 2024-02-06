@@ -48,4 +48,12 @@ public class Eatery extends Base{
     @Builder.Default
     private List<Reply> replies = new ArrayList<>();
 
+    public void update(String eateryName, String eateryType, String eateryLocation,String eateryRealLocation, String comment){
+        this.eateryName = eateryName;
+        this.eateryType = eateryType;
+        this.eateryLocation = eateryLocation;
+        this.eateryRealLocation = eateryRealLocation;
+        this.comment = comment;
+    }
+
 }

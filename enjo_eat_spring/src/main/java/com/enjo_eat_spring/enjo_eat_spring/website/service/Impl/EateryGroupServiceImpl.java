@@ -29,9 +29,11 @@ public class EateryGroupServiceImpl implements EateryGroupService {
         List<EateryGroupDTO.ResponseDTO> eateryGroupDTOList = new ArrayList<>();
         for(EateryGroup group : eateryGroupList){
             EateryGroupDTO.ResponseDTO groupDTO = EateryGroupDTO.ResponseDTO.builder()
+                    .id(group.getId())
                     .groupName(group.getGroupName())
                     .groupComment(group.getGroupComment())
                     .groupLocation(group.getGroupLocation())
+                    .openFlag(group.getOpenFlag())
                     .build();
 
             eateryGroupDTOList.add(groupDTO);
@@ -47,6 +49,7 @@ public class EateryGroupServiceImpl implements EateryGroupService {
                 .groupName(group.getGroupName())
                 .groupComment(group.getGroupComment())
                 .groupLocation(group.getGroupLocation())
+                .openFlag(group.getOpenFlag())
                 .user(group.getUser())
                 .build();
         return groupDTO;
@@ -82,9 +85,11 @@ public class EateryGroupServiceImpl implements EateryGroupService {
         List<EateryGroupDTO.ResponseDTO> eateryGroupDTOList = new ArrayList<>();
         for(EateryGroup group : eateryGroupList){
             EateryGroupDTO.ResponseDTO groupDTO = EateryGroupDTO.ResponseDTO.builder()
+                    .id(group.getId())
                     .groupName(group.getGroupName())
                     .groupComment(group.getGroupComment())
                     .groupLocation(group.getGroupLocation())
+                    .openFlag(group.getOpenFlag())
                     .build();
 
             eateryGroupDTOList.add(groupDTO);
