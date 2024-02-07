@@ -1,6 +1,7 @@
 const group_name = document.getElementById("name");
 const group_location = document.getElementById("location");
 const group_comment = document.getElementById("comment");
+const open = document.getElementById("open");
 
 function validation(){
     if(group_name.value === ""){
@@ -36,14 +37,15 @@ async function createGroup(){
             body: JSON.stringify({
                 "groupName" : group_name.value,
                 "groupLocation" : group_location.value,
-                "groupComment" : group_comment.value
+                "groupComment" : group_comment.value,
+                "openFlag" : open.checked ? 1 : 0
             }),
         })
         const result = await response.json();
         if(response.status !== 200){
             alert("테마 생성 오류.. 관리자에게 문의해주세요.");
         }else{
-
+            location.href = "/eatery-group/group-manage";
         }
 
     }catch(error){

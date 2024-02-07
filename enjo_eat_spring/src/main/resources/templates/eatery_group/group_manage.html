@@ -23,13 +23,16 @@
                     <div class="section-header">
                         <h2>Choice</h2>
                         <p>어느 테마로 가시겠어요?</p>
+                        <p><small>* 공유 테마는 모든 사용자들이 테마에 음식점을 추가 할 수 있는 테마입니다</small></p>
                     </div>
                     <div class="row">
                         <th:block th:if="${groups.size() > 0}">
                             <div th:each="group : ${groups}" class="col-lg-4 mb-5" data-aos="fade-up"
                                  data-aos-delay="200" id="group_box" style="margin:12px;">
                                 <div class="post-box">
-                                    <h4 th:text="${group.getGroupName()}" class="post-title"></h4>
+                                    <div class="mt-2">
+                                    <span class="post-title" th:text="${group.getGroupName()}"></span><h4 th:if="${group.getOpenFlag() == 1}" class="badge bg-success" style="vertical-align: middle;margin-left: 5px;">공유 테마</h4>
+                                    </div>
                                     <p th:text="${group.getGroupLocation()}" class="form-text"></p>
                                     <p th:text="${group.getGroupComment()}" class="form-text"></p>
                                     <a th:href="@{/eatery/eatery-manage/{groupId}(groupId = ${group.getId()})}" class="readmore stretched-link"><span>등록된 메뉴 보러가기</span><i

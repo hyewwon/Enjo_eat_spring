@@ -1,6 +1,7 @@
 const group_name = document.getElementById("name");
 const group_location = document.getElementById("location");
 const group_comment = document.getElementById("comment");
+const open = document.getElementById("open");
 const group_id = document.getElementById("group-id");
 
 async function updateGroup(){
@@ -23,14 +24,14 @@ async function updateGroup(){
         return false;
     }
     try{
-        console.log(group_id.value);
         const response=await fetch(`/eateryGroup-api/group-edit/${group_id.value}`,{
             method:'PUT',
             headers: {csrf_header : csrf_token, "Content-Type" : "application/json"},
             body: JSON.stringify({
                 "groupName" : group_name.value,
                 "groupLocation" : group_location.value,
-                "groupComment" : group_comment.value
+                "groupComment" : group_comment.value,
+                "openFlag" : open.checked ? 1 : 0
             }),
         })
         const result = await response.json();
@@ -38,7 +39,7 @@ async function updateGroup(){
             alert("테마 생성 오류.. 관리자에게 문의해주세요.");
         }else{
             alert("수정되었습니다.");
-            location.reload();
+            location.href = "/my-group"
         }
 
     }catch(error){
@@ -60,7 +61,7 @@ async function deleteGroup(){
             alert("삭제 에러.. 관리자에게 문의해주세요.");
         }else{
             alert("삭제되었습니다.")
-            location.href = "/eatery-group/group-manage"
+            location.href = "/my-group"
         }
     }catch(error){
         alert(error);

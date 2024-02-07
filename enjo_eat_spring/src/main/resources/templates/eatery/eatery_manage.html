@@ -16,10 +16,9 @@
     </div><!-- End Breadcrumbs -->
     <section class="sample-page">
         <div class="container" data-aos="fade-up">
-            <!-- ======= Recent Blog Posts Section ======= -->
             <section id="recent-blog-posts" class="recent-blog-posts">
                 <div class="container" data-aos="fade-up">
-                  <th:block th:if="${eateries.size() > 0}">
+                  <th:block th:if="${eateries.size() > 0 && openFlag == 1}">
                     <a th:href="@{/eatery/eatery-create/{gid}(gid = ${groupId})}" class="btn btn-warning" style="float: right;">음식점 추가하기</a>
                   </th:block>
                     <a th:href="@{/eatery-group/group-manage}" class="btn btn-outline-dark">돌아가기</a>
@@ -55,8 +54,7 @@
                                 <p class="form-text">
                                     (등록된 음식점이 없는 테마는 음식점 고르기에서 제외됩니다)
                                 </p>
-<!--                                <th:block th:if="${}"-->
-                                <a th:href="@{/eatery/eatery-create/{id}(id = ${groupId})}" class="mt-3">등록하기</a>
+                                <a th:if="${openFlag == 1}" th:href="@{/eatery/eatery-create/{id}(id = ${groupId})}" class="mt-3">내가 등록하기</a>
                             </div>
                         </th:block>
                     </div>

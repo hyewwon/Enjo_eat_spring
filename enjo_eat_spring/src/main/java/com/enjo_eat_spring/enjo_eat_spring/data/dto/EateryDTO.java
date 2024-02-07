@@ -107,5 +107,4 @@ public class EateryDTO {
                 .groupId(eatery.getGroup().getId())
                 .build();
     }
-
 }

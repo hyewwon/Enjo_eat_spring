@@ -27,24 +27,29 @@
                 <form action="/eatery-group/group-create" method="post" role="form" id="group_form" enctype="multipart/form-data" class="php-email-form">
                     <div class="row" id="input">
                         <div class="form-group mt-3">
+                            <label class="form-label" for="name">테마 이름</label>
                             <input type="text" class="form-control" name="name" id="name" data-rule="minlen:1" placeholder="이름을 작성해 주세요">
                             <div id="name_error"></div>
                         </div>
                         <div class="form-group mt-3">
+                            <label class="form-label" for="location">주요 지역</label>
                             <input type="text" class="form-control" name="location" id="location" data-rule="minlen:1" placeholder="식당들이 있는 주요지역을 작성해주세요">
                             <div id="location_error"></div>
                         </div>
                         <div class="form-group mt-3">
+                            <label class="form-label" for="comment">테마 소개</label>
                             <input type="text" class="form-control" name="comment" id="comment" data-rule="minlen:1" placeholder="테마 한 줄 소개를 작성해주세요">
                             <div id="comment_error"></div>
                         </div>
                         <div class="form-group mt-3">
-                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="warning">
+                            <label class="form-label" for="open">테마 공유 여부 &nbsp;</label>
+                            <input type="checkbox" id="open" name="open" data-toggle="toggle" data-onstyle="warning" data-on="공유" data-off="비공유">
+                            <p class="mt-2"><small>* 테마를 공유하면 다른 사람들도 내 테마에 음식점을 추가 할 수 있어요! </small></p>
                         </div>
                     </div>
                 </form>
                 <div class="row gy-5 gx-lg-5 mt-3">
-                    <div class="text-center mt-5"><button type="button" id="btn_submit" onclick="createGroup();" class="btn btn-warning btn-lg">다음</button></div>
+                    <div class="text-center mt-5"><button type="button" id="btn_submit" onclick="createGroup();" class="btn btn-warning btn-lg">생성</button></div>
                 </div>
             </div>
         </section><!-- End Contact Section -->
