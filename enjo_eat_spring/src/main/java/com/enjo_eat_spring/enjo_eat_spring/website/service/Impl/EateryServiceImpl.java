@@ -123,4 +123,13 @@ public class EateryServiceImpl implements EateryService {
         return eateryDAO.deleteEatery(eateryId, user);
     }
 
+    @Override
+    public List<Long> getEateryIdList(Long groupId) {
+        List<Eatery> eateryList = eateryDAO.getEateryList(groupId);
+        List<Long> eateryIdList = new ArrayList<>();
+        for(Eatery eatery: eateryList){
+            eateryIdList.add(eatery.getId());
+        }
+        return eateryIdList;
+    }
 }

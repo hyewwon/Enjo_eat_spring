@@ -14,4 +14,5 @@ public interface EateryService {
     List<EateryDTO.ListResponseDTO> getEateryList(Long groupId);
     List<EateryDTO.ListResponseDTO> getEateryListByUser(Long groupId, String username);
     List<EateryDTO.ListResponseDTO> getEateryListTop5();
+    List<Long> getEateryIdList(Long groupId);
 }

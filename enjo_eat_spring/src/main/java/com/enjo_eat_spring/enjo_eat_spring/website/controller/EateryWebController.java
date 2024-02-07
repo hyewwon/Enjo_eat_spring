@@ -37,10 +37,12 @@ public class EateryWebController {
     }
 
     @GetMapping("/eatery-manage/{groupId}")
-    public String getAllEateries(Model model, @PathVariable Long groupId){
+    public String getAllEateriesByGroup(Model model, @PathVariable Long groupId){
         List<EateryDTO.ListResponseDTO> eateryList = eateryService.getEateryList(groupId);
+        int openFlag = eateryGroupService.getGroup(groupId).getOpenFlag();
         model.addAttribute("eateries", eateryList);
         model.addAttribute("groupId", groupId);
+        model.addAttribute("openFlag", openFlag);
         return "eatery/eatery_manage";
     }
 

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout">
+<th:block layout:fragment="content">
+<section class="sample-page">
+    <div class="container" data-aos="fade-up">
+        <section id="recent-blog-posts" class="recent-blog-posts">
+            <a type="button" class="btn btn-outline-dark" th:href="@{/eatery-selection/group-select}">테마 다시 고르기</a>
+            <div class="container" data-aos="fade-up">
+                <div class="section-header">
+                    <h2>Select</h2>
+                    <th:block th:if="${eateryIdList.size() > 0}">
+                        <p class="form-text mt-2">* 무작위로 섞인 음식점들 중 하나를 선택하세요</p>
+                    </th:block>
+                </div>
+                <th:block th:if="${eateryIdList.size() > 0}">
+                    <div id="card_section" class="row">
+                        <div th:each="id : ${eateryIdList}" class="card mb-5" data-url="{% url 'Eatery:eatery_detail' eatery.id %}" data-eatery-name="{{eatery.eatery_name}}" data-eatery-image="{% if eatery.image %}{{eatery.image.url}}{% else %}/{{eatery.crawling_image}}{% endif %}">
+                            <div id="card_front" class="common front" onclick="selectCard(this);">
+                                <img th:src="@{/assets/img/home.png}" alt="" class="front_image">
+                            </div>
+                            <div id="card_back" class="common back">
+                                <p class="form-text" style="color:rgb(232,122,68);">
+                                    {{eatery.eatery_name}}
+                                </p>
+                                <p>
+                                    <img id="back_image" src="{{eatery.image.url}}" alt="">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+                <th:block th:unless="${eateryIdList.size() > 0}">
+                    <div class="text-center mt-5 form-control" style="text-align:center;height:300px;padding:50px;">
+                        <p class="form-text" style="font-size:large;">등록된 음식점이 없습니다. 테마를 다시 선택해 주세요</p>
+                    </div>
+                </th:block>
+            </div>
+        </section>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="result_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">선택 결과 😁</h5>
+    </div>
+    <div class="modal-body">
+        <div id="result-eatery"></div>
+    </div>
+    <div class="modal-footer">
+        <a href="" type="button" id="modal-detail-btn" class="btn">자세히 보러가기</a>
+        <a href="/" type="button" id="modal-ok-btn" class="btn">메인으로</a>
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" onclick="window.location.reload();">다시 고르기</button>
+    </div>
+    </div>
+</div>
+</div>
+</th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/eatery_selection/eatery_select.css}">
+</th:block>
+<th:block layout:fragment="script">
+    <script th:src="@{/js/eatery_selection/eatery_select.js}"></script>
+</th:block>
+</html>
