@@ -76,7 +76,7 @@ async function createEatery(){
             alert("테마 생성 오류.. 관리자에게 문의해주세요.");
         }else{
             alert("등록 완료!");
-            location.href = `/eatery-group/eatery-manage/${group_id.value}`
+            location.href = `/eatery/eatery-manage/${group_id.value}`
         }
     }catch(error){
         alert(error);

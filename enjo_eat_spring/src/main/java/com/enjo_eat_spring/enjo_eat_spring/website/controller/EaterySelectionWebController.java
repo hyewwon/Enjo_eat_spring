@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,8 +24,9 @@ public class EaterySelectionWebController {
     EateryService eateryService;
 
     @Autowired
-    public EaterySelectionWebController(EateryGroupService eateryGroupService){
+    public EaterySelectionWebController(EateryGroupService eateryGroupService, EateryService eateryService){
         this.eateryGroupService = eateryGroupService;
+        this.eateryService = eateryService;
     }
 
     @GetMapping("/group-select")
@@ -35,6 +39,7 @@ public class EaterySelectionWebController {
    @GetMapping("/eatery-select/{groupId}")
     public String getAllEateriesByGroup(Model model, @PathVariable Long groupId){
         List<Long> eateryIdList = eateryService.getEateryIdList(groupId);
+       Collections.shuffle(eateryIdList);
         model.addAttribute("eateryIdList", eateryIdList);
         return "eatery_selection/eatery_select";
    }

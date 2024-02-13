@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -121,6 +122,13 @@ public class EateryServiceImpl implements EateryService {
     public Boolean deleteEatery(Long eateryId, String username) {
         User user = authDAO.getUser(username);
         return eateryDAO.deleteEatery(eateryId, user);
+    }
+
+    @Override
+    public EateryDTO.SelectionResponseDTO getSelectedEatery(Long eateryId) {
+        Eatery eatery = eateryDAO.getEatery(eateryId);
+        EateryDTO.SelectionResponseDTO eateryDTO = new EateryDTO.SelectionResponseDTO();
+        return eateryDTO.toDto(eatery);
     }
 
     @Override

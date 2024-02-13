@@ -11,6 +11,7 @@ public interface EateryService {
     EateryDTO.ResponseDTO getEatery(Long eateryId);
     Boolean updateEatery(EateryDTO.RequestDTO requestDTO, Long eateryId, String username);
     Boolean deleteEatery(Long eateryId, String username);
+    EateryDTO.SelectionResponseDTO getSelectedEatery(Long eateryId);
     List<EateryDTO.ListResponseDTO> getEateryList(Long groupId);
     List<EateryDTO.ListResponseDTO> getEateryListByUser(Long groupId, String username);
     List<EateryDTO.ListResponseDTO> getEateryListTop5();

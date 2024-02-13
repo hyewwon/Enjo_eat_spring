@@ -95,16 +95,37 @@ public class EateryDTO {
         private Image image;
         private User user;
         private Long groupId;
+
+        public EateryDTO.ListResponseDTO toDto(Eatery eatery) {
+            return ListResponseDTO.builder()
+                    .id(eatery.getId())
+                    .eateryName(eatery.getEateryName())
+                    .comment(eatery.getComment())
+                    .image(eatery.getImage())
+                    .user(eatery.getUser())
+                    .groupId(eatery.getGroup().getId())
+                    .build();
+        }
     }
 
-    public EateryDTO.ListResponseDTO toDto(Eatery eatery) {
-        return ListResponseDTO.builder()
-                .id(eatery.getId())
-                .eateryName(eatery.getEateryName())
-                .comment(eatery.getComment())
-                .image(eatery.getImage())
-                .user(eatery.getUser())
-                .groupId(eatery.getGroup().getId())
-                .build();
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    @Getter
+    public static class SelectionResponseDTO {
+        private Long id;
+        private String eateryName;
+        private String imagePath;
+        private String imageName;
+
+        public EateryDTO.SelectionResponseDTO toDto(Eatery eatery) {
+            return SelectionResponseDTO.builder()
+                    .id(eatery.getId())
+                    .eateryName(eatery.getEateryName())
+                    .imagePath(eatery.getImage().getImagePath())
+                    .imageName(eatery.getImage().getImageName())
+                    .build();
+        }
     }
+
 }

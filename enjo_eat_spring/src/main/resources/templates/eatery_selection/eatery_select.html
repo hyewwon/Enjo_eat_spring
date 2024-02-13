@@ -15,24 +15,23 @@
                 </div>
                 <th:block th:if="${eateryIdList.size() > 0}">
                     <div id="card_section" class="row">
-                        <div th:each="id : ${eateryIdList}" class="card mb-5" data-url="{% url 'Eatery:eatery_detail' eatery.id %}" data-eatery-name="{{eatery.eatery_name}}" data-eatery-image="{% if eatery.image %}{{eatery.image.url}}{% else %}/{{eatery.crawling_image}}{% endif %}">
-                            <div id="card_front" class="common front" onclick="selectCard(this);">
+                        <div th:each="id : ${eateryIdList}" class="card mb-5">
+                            <div id="card_front" class="common front" th:onclick="'selectCard(this,' + ${id} + ')'">
                                 <img th:src="@{/assets/img/home.png}" alt="" class="front_image">
                             </div>
                             <div id="card_back" class="common back">
                                 <p class="form-text" style="color:rgb(232,122,68);">
-                                    {{eatery.eatery_name}}
-                                </p>
-                                <p>
-                                    <img id="back_image" src="{{eatery.image.url}}" alt="">
+                                    두근 두근!
                                 </p>
                             </div>
                         </div>
                     </div>
                 </th:block>
                 <th:block th:unless="${eateryIdList.size() > 0}">
-                    <div class="text-center mt-5 form-control" style="text-align:center;height:300px;padding:50px;">
-                        <p class="form-text" style="font-size:large;">등록된 음식점이 없습니다. 테마를 다시 선택해 주세요</p>
+                    <div class="text-center gy-5 gx-lg-5 mt-5 form-control" style="padding:50px;">
+                        <p class="form-text" style="font-size:large">
+                        <p>등록된 음식점이 없습니다.</p>
+                        <p>테마를 다시 선택해주세요!</p>
                     </div>
                 </th:block>
             </div>
