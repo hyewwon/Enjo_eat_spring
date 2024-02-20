@@ -15,6 +15,7 @@ public interface EateryDAO {
     Boolean updateEatery(Eatery eatery, Long eateryId, User user);
     Boolean deleteEatery(Long eateryId, User user);
     List<Eatery> getEateryList(Long groupId);
+    List<Eatery> getAllEateryList();
     List<Eatery> getEateryListByUser(Long groupId, User user);
     List<Eatery> getEateryListTop5();
 }

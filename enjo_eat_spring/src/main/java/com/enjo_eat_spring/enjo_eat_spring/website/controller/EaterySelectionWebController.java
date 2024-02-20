@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 @Controller
 @RequiredArgsConstructor
@@ -42,5 +40,10 @@ public class EaterySelectionWebController {
        Collections.shuffle(eateryIdList);
         model.addAttribute("eateryIdList", eateryIdList);
         return "eatery_selection/eatery_select";
+   }
+
+   @GetMapping("/custom-select")
+    public String getFilters(Model model){
+        return "eatery_selection/custom_select";
    }
 }

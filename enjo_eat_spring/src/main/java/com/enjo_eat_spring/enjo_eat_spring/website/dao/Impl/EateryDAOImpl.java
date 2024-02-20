@@ -39,6 +39,11 @@ public class EateryDAOImpl implements EateryDAO {
     }
 
     @Override
+    public List<Eatery> getAllEateryList() {
+        return eateryRepository.findAll();
+    }
+
+    @Override
     @Transactional
     public Boolean createEatery(Eatery eatery) {
         eateryRepository.save(eatery);

@@ -140,4 +140,14 @@ public class EateryServiceImpl implements EateryService {
         }
         return eateryIdList;
     }
+
+    @Override
+    public List<String> getAllEateryLocationList() {
+        List<Eatery> eateryList = eateryDAO.getAllEateryList();
+        List<String> eateryLocationList = new ArrayList<>();
+        for(Eatery eatery : eateryList){
+            eateryLocationList.add(eatery.getEateryLocation());
+        }
+        return eateryLocationList;
+    }
 }
